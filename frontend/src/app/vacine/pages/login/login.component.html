@@ -1,23 +1,19 @@
-<div class="login-container">
-  <div>
-    <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
-    <span class="icon-title">Vacine</span>
+<div class="container">
+  <div class="login-container">
+    <app-logo></app-logo>
+
+    <form [formGroup]="loginFormGroup" class="login-form">
+      <div class="login-field">
+        <fa-icon class="user-icon" [icon]="faUser"></fa-icon>
+        <input type="email" formControlName="email" placeholder="Email">
+      </div>
+
+      <div class="login-field">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input type="password" formControlName="password" placeholder="Password">
+      </div>
+
+      <app-primary-btn label="ENTRAR" (click)="doLogin()"></app-primary-btn>
+    </form>
   </div>
-  <div>
-    <p class="icon-subtitle">O seu gerenciador de vacinas!</p>
-  </div>
-
-  <form>
-    <div class="login-field">
-      <label for="email">E-mail</label>
-      <input type="email" name="email" id="email">
-    </div>
-
-    <div class="login-field">
-      <label for="password">Senha</label>
-      <input type="password" name="password" id="password">
-    </div>
-
-    <button class="button-submit" type="submit">ENTRAR</button>
-  </form>
 </div>
