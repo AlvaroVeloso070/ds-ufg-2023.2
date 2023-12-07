@@ -1,0 +1,4 @@
+<span class="p-float-label textfield">
+  <input pInputText [id]="id" [(ngModel)]="model" (ngModelChange)="modelChange.emit($event)"/>
+  <label [for]="id">{{label}}</label>
+</span>
