@@ -1,14 +1,17 @@
 <div class="sidenav">
   <div class="logo-container">
-    <div class="logo">
-      <app-logo [hideText]="true"></app-logo>
+    <div class="logo">Logo
+<!--      <app-logo [hideText]="true"></app-logo>-->
     </div>
   </div>
 
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let item of sideNavItems">
-      <a href="" class="sidenav-nav-link" [routerLink]="item.route">
-        <fa-icon [icon]="item.icon"></fa-icon>
+      <a href="" class="sidenav-nav-link" [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+
+        <fa-icon class="sidenav-link-icon" [icon]="item.icon"></fa-icon>
         <span class="sidenav-nav-link-text">{{item.label}}</span>
       </a>
     </li>

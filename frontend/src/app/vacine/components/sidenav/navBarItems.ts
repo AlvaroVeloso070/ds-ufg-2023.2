@@ -4,16 +4,16 @@ export const navBarItems = [
   {
     label: 'Agendamentos',
     icon: faCalendarDays,
-    route: '/agendamentos'
+    route: 'appointments'
   },
   {
     label: 'Novo Agendamento',
     icon: faPlus,
-    route: '/agendamentos/novo'
+    route: 'appointment/new'
   },
   {
     label: 'Perfil',
     icon: faUser,
-    route: '/perfil'
+    route: 'profile'
   }
 ];
