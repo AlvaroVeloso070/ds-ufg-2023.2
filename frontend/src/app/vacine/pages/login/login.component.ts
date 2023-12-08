@@ -7,6 +7,7 @@ import {faLock} from "@fortawesome/free-solid-svg-icons";
 import {PrimaryBtnComponent} from "../../components/primary-btn/primary-btn.component";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginService} from "../../core/services/login/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,9 @@ export class LoginComponent implements OnInit{
 
   loginFormGroup!: FormGroup;
 
+  constructor(private router: Router) {
+  }
+
   ngOnInit(): void {
     this.loginFormGroup = LoginService.getFormGroup();
   }
@@ -27,6 +31,10 @@ export class LoginComponent implements OnInit{
     if (this.loginFormGroup.valid){
       LoginService.login(this.loginFormGroup.value);
     }
+  }
+
+  esqueciMinhaSenha(){
+    this.router.navigate(['/forgot-password']);
   }
 
   protected readonly faUser = faUser;

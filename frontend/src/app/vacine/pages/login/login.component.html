@@ -1,6 +1,6 @@
 <div class="container">
   <div class="login-container">
-    <app-logo></app-logo>
+    <app-logo [justIcon]="false"></app-logo>
 
     <form [formGroup]="loginFormGroup" class="login-form">
       <div class="login-field">
@@ -10,7 +10,9 @@
 
       <div class="login-field">
         <fa-icon [icon]="faLock"></fa-icon>
-        <input type="password" formControlName="password" placeholder="Password">
+        <input type="password" formControlName="password" placeholder="Senha">
+
+        <a class="password-recovery" (click)="esqueciMinhaSenha()">Esqueci minha senha</a>
       </div>
 
       <app-primary-btn label="ENTRAR" (click)="doLogin()"></app-primary-btn>

@@ -1,0 +1,31 @@
+<div class="sidenav">
+  <div class="logo-container">
+    <div class="logo">Logo
+<!--      <app-logo [hideText]="true"></app-logo>-->
+    </div>
+  </div>
+
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let item of sideNavItems">
+      <a href="" class="sidenav-nav-link" [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+
+        <fa-icon class="sidenav-link-icon" [icon]="item.icon"></fa-icon>
+        <span class="sidenav-nav-link-text">{{item.label}}</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="sidenav-footer">
+    <div class="sidenav-footer-item">
+      <fa-icon [icon]="faCircleUser"></fa-icon>
+
+      <span>{{usuarioLogado.name}}</span>
+      <a href="" class="sidenav-footer-link" (click)="logout()">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      </a>
+    </div>
+  </div>
+</div>
+

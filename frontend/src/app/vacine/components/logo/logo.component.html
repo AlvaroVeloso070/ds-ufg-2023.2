@@ -1,7 +1,13 @@
-<div>
-  <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
-  <span class="icon-title">Vacine</span>
+<div *ngIf="!justIcon" class="logo">
+  <div>
+    <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
+    <span class="icon-title">Vacine</span>
+  </div>
+  <div *ngIf="!hideText">
+    <p class="icon-subtitle">O seu gerenciador de vacinas!</p>
+  </div>
 </div>
-<div>
-  <p class="icon-subtitle">O seu gerenciador de vacinas!</p>
+
+<div *ngIf="justIcon">
+  <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
 </div>
