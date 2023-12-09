@@ -1,1 +1,47 @@
+<div>
+  <div class="title">
+    <h2>Perfil</h2>
+  </div>
 
+  <form>
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.name" label="Nome"></app-textbox>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.cpf" label="CPF"></app-textbox>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.rg" label="RG"></app-textbox>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.phone" label="Telefone"></app-textbox>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-date-field [(model)]="user.birthDate" label="Data de Nascimento"></app-date-field>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.login.email" label="Email"></app-textbox>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-password-field id="senha" [(model)]="user.login.password" label="Senha"></app-password-field>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-password-field id="confirmarSenha" [(model)]="user.login.password_confirmation" label="Confirmar Senha"></app-password-field>
+      </div>
+    </div>
+  </form>
+</div>
