@@ -4,7 +4,7 @@ import {LogoComponent} from "../logo/logo.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {navBarItems} from "./navBarItems";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {faCircleUser, faClose, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCircleUser, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
 import {LoginService} from "../../core/services/login/login.service";
 import User from "../../core/entities/User";
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
@@ -45,19 +45,20 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 export class SidenavComponent implements OnInit{
 
   usuarioLogado!: User;
-  ngOnInit(): void {
-    this.usuarioLogado = LoginService.getUsuarioLogado();
+
+  constructor(private loginService: LoginService) {
   }
 
-  collapsed: boolean = true;
+  ngOnInit(): void {
+    this.usuarioLogado = this.loginService.getUsuarioLogado();
+  }
 
   sideNavItems = navBarItems;
 
-  protected readonly faClose = faClose;
   protected readonly faSignOutAlt = faSignOutAlt;
 
   logout() {
-    LoginService.logout();
+    this.loginService.logout();
   }
 
   protected readonly faUser = faUser;

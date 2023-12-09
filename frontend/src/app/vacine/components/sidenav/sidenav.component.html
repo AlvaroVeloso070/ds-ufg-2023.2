@@ -1,7 +1,8 @@
 <div class="sidenav">
   <div class="logo-container">
-    <div class="logo">Logo
-<!--      <app-logo [hideText]="true"></app-logo>-->
+    <div class="logo">
+        <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
+        <span class="icon-title">Vacine</span>
     </div>
   </div>
 
@@ -19,11 +20,11 @@
 
   <div class="sidenav-footer">
     <div class="sidenav-footer-item">
-      <fa-icon [icon]="faCircleUser"></fa-icon>
+      <fa-icon class="sidenav-footer-icon" [icon]="faCircleUser"></fa-icon>
 
       <span>{{usuarioLogado.name}}</span>
       <a href="" class="sidenav-footer-link" (click)="logout()">
-        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        <fa-icon class="sidenav-footer-icon" [icon]="faSignOutAlt"></fa-icon>
       </a>
     </div>
   </div>

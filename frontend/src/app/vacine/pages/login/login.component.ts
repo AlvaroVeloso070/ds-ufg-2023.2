@@ -20,16 +20,17 @@ export class LoginComponent implements OnInit{
 
   loginFormGroup!: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private loginService: LoginService) {
   }
 
   ngOnInit(): void {
-    this.loginFormGroup = LoginService.getFormGroup();
+    this.loginFormGroup = this.loginService.getFormGroup();
   }
 
   doLogin():void{
     if (this.loginFormGroup.valid){
-      LoginService.login(this.loginFormGroup.value);
+      this.loginService.doLogin(this.loginFormGroup.value);
     }
   }
 

@@ -2,30 +2,32 @@ import {Injectable} from '@angular/core';
 import Login from "../../entities/Login";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import User from "../../entities/User";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  static login(login: Login) {
-    alert("email: " + login.email + " senha:" + login.password)
+  doLogin(login: Login) {
+    console.log(login);
+    this.router.navigate(['/home']);
   }
 
-  static getFormGroup() : FormGroup {
+  getFormGroup() : FormGroup {
     return new FormBuilder().group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
-  static logout() {
-    alert("logout")
+  logout() {
+    this.router.navigate(['/login']);
   }
 
-  static getUsuarioLogado(){
+  getUsuarioLogado(){
     return new User("Usuário Logado");
   }
 }

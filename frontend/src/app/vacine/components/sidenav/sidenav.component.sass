@@ -4,6 +4,8 @@
   width: 240px
   min-height: 100vh
   height: auto
+  display: flex
+  flex-direction: column
 
 .sidenav .logo-container
   display: flex
@@ -12,16 +14,30 @@
   width: 100%
 
 .sidenav .logo-container .logo
-  background: #fff
   text-align: center
   width: 3rem
   min-width: 3rem
   border-radius: 0.313rem
   padding: 0.313rem
-  font-size: 24px
-  font-weight: 900
+  font-size: 3rem
   cursor: pointer
   border: none
+  display: flex
+  flex-direction: row
+
+  color: #F5F5F5
+
+  .icon
+    width: 75px
+
+  .icon-title
+    color: #FFF
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+    align-self: flex-end
+    font-style: normal
+    font-weight: 300
+    line-height: 1
+    margin: 0
 
 .sidenav .logo-container .logo-text
   margin-left: 1.5rem
@@ -94,4 +110,14 @@
 
 fa-icon
   color: #B01368
+
+.sidenav-footer
+  margin-top: auto
+  padding: 0.938rem
+  color: #F5F5F5
+
+  .sidenav-footer-item span
+    margin-left: 0.75rem
+  .sidenav-footer-item a
+    margin-left: 1.5rem
 

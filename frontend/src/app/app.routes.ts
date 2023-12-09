@@ -9,14 +9,14 @@ import {NewAppointmentComponent} from "./vacine/pages/new-appointment/new-appoin
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent, outlet: 'dashboard'},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'home', component: HomeComponent,
     children:[
-      {path: 'profile', component: ProfileComponent},
       {path: 'appointments', component: AppointmentsComponent},
+      {path: 'profile', component: ProfileComponent},
       {path: 'appointment/new', component: NewAppointmentComponent},
     ]},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
