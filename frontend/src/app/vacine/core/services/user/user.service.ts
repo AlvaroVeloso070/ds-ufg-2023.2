@@ -27,6 +27,6 @@ export class UserService {
   }
 
   getUser(id: number) {
-    return new User("Usuário Logado", "123456789", "123456789", new Date(), "M", "Mãe", "628.913.950-93", new Login("email@email.com", "senha123", "senha123"));
+    return new User("Usuário Logado", "123456789", "62940028922", new Date(), "M", "Mãe", "628.913.950-93", new Login("email@email.com", "senha123", "senha123"));
   }
 }

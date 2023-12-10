@@ -1,4 +1,22 @@
-<span class="p-float-label textfield">
-  <input pInputText [id]="id" [(ngModel)]="model" (ngModelChange)="modelChange.emit($event)"/>
+<div class="textfield">
   <label [for]="id">{{label}}</label>
-</span>
+  <input *ngIf="!mask" pInputText
+         [id]="id"
+         [(ngModel)]="model"
+         (ngModelChange)="modelChange.emit($event)"
+         [placeholder]="placeholder"
+         [required]="required"
+         [readOnly]="readonly"
+         [disabled]="disabled"/>
+
+  <p-inputMask *ngIf="mask"
+               [id]="id"
+               mask="{{mask}}"
+               [(ngModel)]="model"
+               (ngModelChange)="modelChange.emit($event)"
+               [placeholder]="placeholder"
+               [required]="required"
+               [readonly]="readonly"
+               [disabled]="disabled"/>
+
+</div>

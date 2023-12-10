@@ -1,4 +1,4 @@
-<div>
+<div class="profile-container">
   <div class="title">
     <h2>Perfil</h2>
   </div>
@@ -10,7 +10,7 @@
       </div>
 
       <div class="col col-sm-6">
-        <app-textbox [(model)]="user.cpf" label="CPF"></app-textbox>
+        <app-textbox [(model)]="user.cpf" label="CPF" mask="999.999.999-99" placeholder="___.___.___.__"></app-textbox>
       </div>
     </div>
 
@@ -20,7 +20,7 @@
       </div>
 
       <div class="col col-sm-6">
-        <app-textbox [(model)]="user.phone" label="Telefone"></app-textbox>
+        <app-textbox [(model)]="user.phone" label="Telefone" mask="(99) 99999-9999" placeholder="(xx) xxxxx-xxxx"></app-textbox>
       </div>
     </div>
 
@@ -36,11 +36,27 @@
 
     <div class="row">
       <div class="col col-sm-6">
+        <app-textbox [(model)]="user.sexo" label="Sexo"></app-textbox>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-textbox [(model)]="user.motherName" label="Nome da mãe"></app-textbox>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
         <app-password-field id="senha" [(model)]="user.login.password" label="Senha"></app-password-field>
       </div>
 
       <div class="col col-sm-6">
         <app-password-field id="confirmarSenha" [(model)]="user.login.password_confirmation" label="Confirmar Senha"></app-password-field>
+      </div>
+    </div>
+
+    <div class="row btn-editar">
+      <div class="col col-sm-3">
+        <app-primary-btn label="EDITAR"></app-primary-btn>
       </div>
     </div>
   </form>
