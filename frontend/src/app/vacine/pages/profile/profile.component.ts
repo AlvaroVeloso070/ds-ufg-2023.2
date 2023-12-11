@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../core/services/user/user.service";
 import User from "../../core/entities/user";
+import Gender from "../../core/entities/gender";
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,11 @@ export class ProfileComponent implements OnInit{
   constructor(private userService: UserService) { }
 
   user !: User;
+  genders: Gender[] = this.userService.getGenders();
 
   ngOnInit(): void {
     this.user = this.userService.getUser(1);
+    this.genders = this.userService.getGenders();
   }
 
 }

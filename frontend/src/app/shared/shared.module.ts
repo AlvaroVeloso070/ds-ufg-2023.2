@@ -14,6 +14,10 @@ import { TextFieldComponent } from './text-field/text-field.component';
 import {InputMaskModule} from "primeng/inputmask";
 import { BaseFieldComponent } from './base-field.component';
 import {InputTextModule} from "primeng/inputtext";
+import { CheckboxFieldComponent } from './checkbox-field/checkbox-field.component';
+import {CheckboxModule} from "primeng/checkbox";
+import { DropdownFieldComponent } from './dropdown-field/dropdown-field.component';
+import {DropdownModule} from "primeng/dropdown";
 
 
 
@@ -25,16 +29,20 @@ import {InputTextModule} from "primeng/inputtext";
     PrimaryBtnComponent,
     SidenavComponent,
     TextFieldComponent,
-    BaseFieldComponent
+    BaseFieldComponent,
+    CheckboxFieldComponent,
+    DropdownFieldComponent
   ],
-  exports: [
-    TextFieldComponent,
-    PrimaryBtnComponent,
-    PasswordFieldComponent,
-    DateFieldComponent,
-    LogoComponent,
-    SidenavComponent
-  ],
+    exports: [
+        TextFieldComponent,
+        PrimaryBtnComponent,
+        PasswordFieldComponent,
+        DateFieldComponent,
+        LogoComponent,
+        SidenavComponent,
+        CheckboxFieldComponent,
+        DropdownFieldComponent
+    ],
   imports: [
     CommonModule,
     CalendarModule,
@@ -44,7 +52,9 @@ import {InputTextModule} from "primeng/inputtext";
     FaIconComponent,
     RouterLink,
     InputMaskModule,
-    InputTextModule
+    InputTextModule,
+    CheckboxModule,
+    DropdownModule
   ]
 })
 export class SharedModule { }

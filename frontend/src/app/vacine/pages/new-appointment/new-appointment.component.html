@@ -1,1 +1,38 @@
-<p>new-appointment works!</p>
+<div class="new-appointment-container">
+  <div class="title">
+    <h2>Novo Agendamento</h2>
+  </div>
+
+  <form>
+    <div class="row">
+      <div>
+        <app-dropdown-field label="Qual vacina?" name="vacina" placeholder="Coronavirus"></app-dropdown-field>
+        <app-checkbox-field label="Nova dose?" name="novaDose" [(model)]="novaDose"></app-checkbox-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <app-dropdown-field label="Selecione a Dose Anterior" name="dose_anterior" placeholder="Coronavirus"></app-dropdown-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <app-dropdown-field label="Distribuidora de preferencia" name="distribuidora" placeholder="Pfizer"></app-dropdown-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <app-date-field label="Data:" name="date" ></app-date-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <app-primary-btn label="AGENDAR"></app-primary-btn>
+      </div>
+    </div>
+  </form>
+</div>

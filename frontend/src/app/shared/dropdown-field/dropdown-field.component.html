@@ -1,0 +1,11 @@
+<div class="dropdown-container">
+  <label [for]="id">{{label}}</label>
+  <p-dropdown [options]="options"
+              [(ngModel)]="model"
+              (ngModelChange)="modelChange.emit($event)"
+              [optionLabel]="optionLabel"
+              [showClear]="showClear"
+              [placeholder]="placeholder"
+              [id]="id"></p-dropdown>
+
+</div>

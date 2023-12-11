@@ -33,7 +33,7 @@ body
   color: #FFFFFF
 
 
-.p-inputtext
+.p-inputtext, .p-dropdown
   width: 100%
   background: $input-background-color
   box-sizing: border-box
@@ -43,17 +43,27 @@ body
   height: $input-height
   border-radius: 10px
 
+.p-dropdown-panel
+  border: none
+
+  .p-dropdown-items-wrapper
+    background: $input-background-color
+    color: $secondary-color
+
+    .p-highlight
+      background: $primary-color
+
 button
   border: none
 
-eyeicon, eyeslashicon
+eyeicon, eyeslashicon, timesicon
   color: $primary-color
 
 label
   color: $label-color
   font-size: 16px
 
-.p-password, .p-inputtext, .p-calendar
+.p-password, .p-inputtext, .p-calendar, .p-dropdown
   width: 100%
 
 p-calendar

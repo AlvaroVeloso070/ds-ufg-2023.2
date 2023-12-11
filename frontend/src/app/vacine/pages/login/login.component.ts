@@ -31,6 +31,11 @@ export class LoginComponent implements OnInit{
     this.router.navigate(['/vacine/forgot-password']);
   }
 
+  createAccount() {
+    this.router.navigate(['/vacine/signup']);
+  }
+
   protected readonly faUser = faUser;
+
   protected readonly faLock = faLock;
 }

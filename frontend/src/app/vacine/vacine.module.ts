@@ -14,6 +14,7 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { NewAppointmentComponent } from './pages/new-appointment/new-appointment.component';
 import { HomeComponent } from './pages/home/home.component';
 import {TableModule} from "primeng/table";
+import { SignupComponent } from './pages/signup/signup.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {TableModule} from "primeng/table";
     PasswordRecoveryConfirmationComponent,
     AppointmentsComponent,
     NewAppointmentComponent,
-    HomeComponent
+    HomeComponent,
+    SignupComponent
   ],
     imports: [
         CommonModule,

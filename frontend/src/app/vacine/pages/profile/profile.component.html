@@ -36,7 +36,7 @@
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-text-field id="gender" [(model)]="user.gender" label="Sexo"></app-text-field>
+        <app-dropdown-field id="gender" [(model)]="user.gender" [options]="genders" optionLabel="name" label="Sexo"></app-dropdown-field>
       </div>
 
       <div class="col col-sm-6">

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import User from "../../entities/user";
 import Login from "../../entities/login";
+import Gender from "../../entities/gender";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,15 @@ export class UserService {
     });
   }
 
-  getUser(id: number) {
+  getUser(id: number) : User {
     return new User("Usuário Logado", "123456789", "62940028922", new Date(), "M", "Mãe", "628.913.950-93", new Login("email@email.com", "senha123", "senha123"));
+  }
+
+  getGenders(): Gender[]{
+    return [
+      new Gender('M', 'Masculino'),
+      new Gender('F', 'Feminino'),
+      new Gender('O', 'Outro')
+    ];
   }
 }
