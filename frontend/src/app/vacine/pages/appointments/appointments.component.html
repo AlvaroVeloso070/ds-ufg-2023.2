@@ -1,1 +1,60 @@
-<p>appointments works!</p>
+<div class="container">
+    <div class="nextAppoitmentTable">
+        <p-table [value]="nextAppointment" [tableStyle]="{'min-width': '80rem'}">
+            <ng-template pTemplate="caption">
+                <div>
+                    Seu Próximo Compromisso: 
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
+                </tr>
+            </ng-template>
+        
+            <ng-template pTemplate="body" let-appointment>
+                <tr>
+                    <td>{{appointment.data}}</td>
+                    <td>{{appointment.vacina.titulo}}</td>
+                    <td>{{appointment.vacina.dose}}</td>
+                    <td>
+                        <a class="searchIcon" (click)="openInfoModal()">
+                            <fa-icon [icon]="faSearch"></fa-icon>
+                        </a>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="allAppointmentsTable">
+        <p-table [value]="allAppointments" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '80rem'}">
+            <ng-template pTemplate="caption">
+                <div class="captionHeader">
+                    Histórico: 
+                    <a class="linkHistorico" (click)="verHistoricoCompleto()">Ver Histórico Completo</a>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
+                </tr>
+            </ng-template>
+        
+            <ng-template pTemplate="body" let-appointment>
+                <tr>
+                    <td>{{appointment.data}}</td>
+                    <td>{{appointment.vacina.titulo}}</td>
+                    <td>{{appointment.vacina.dose}}</td>
+                    <td>
+                        <a class="searchIcon" (click)="openInfoModal()">
+                            <fa-icon [icon]="faSearch"></fa-icon>
+                        </a>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
