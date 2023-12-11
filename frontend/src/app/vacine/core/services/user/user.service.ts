@@ -1,15 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import User from "../../entities/User";
-import Login from "../../entities/Login";
+import User from "../../entities/user";
+import Login from "../../entities/login";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() {
-  }
+  constructor() { }
 
   getFormGroup(): FormGroup {
     return new FormBuilder().group({

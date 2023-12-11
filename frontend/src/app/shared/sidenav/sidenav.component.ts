@@ -1,20 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LogoComponent} from "../logo/logo.component";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {navBarItems} from "./navBarItems";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {faCircleUser, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
-import {LoginService} from "../../core/services/login/login.service";
-import User from "../../core/entities/User";
+import {faCircleUser, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
+import {navBarItems} from "./navBarItems";
+import {LoginService} from "../../vacine/core/services/login/login.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-sidenav',
-  standalone: true,
-  imports: [CommonModule, LogoComponent, FaIconComponent, RouterLink, RouterLinkActive],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.sass',
+  providers: [MessageService],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -44,7 +39,7 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 })
 export class SidenavComponent implements OnInit{
 
-  usuarioLogado!: User;
+  usuarioLogado!: any;
 
   constructor(private loginService: LoginService) {
   }
@@ -55,12 +50,10 @@ export class SidenavComponent implements OnInit{
 
   sideNavItems = navBarItems;
 
-  protected readonly faSignOutAlt = faSignOutAlt;
-
   logout() {
     this.loginService.logout();
   }
 
-  protected readonly faUser = faUser;
   protected readonly faCircleUser = faCircleUser;
+  protected readonly faSignOutAlt = faSignOutAlt;
 }

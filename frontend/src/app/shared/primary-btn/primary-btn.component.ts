@@ -1,17 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {BaseFieldComponent} from "../base-field.component";
 
 @Component({
   selector: 'app-primary-btn',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './primary-btn.component.html',
   styleUrl: './primary-btn.component.sass'
 })
-export class PrimaryBtnComponent {
-
-  @Input()
-  label!: string;
+export class PrimaryBtnComponent extends BaseFieldComponent{
 
   @Input()
   onClick!: () => any;
@@ -21,5 +16,4 @@ export class PrimaryBtnComponent {
       this.onClick();
     }
   }
-
 }

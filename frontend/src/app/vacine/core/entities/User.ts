@@ -1,13 +1,12 @@
-import Login from "./Login";
+import Login from "./login";
 
-export default class User {
-
-  constructor(name: string, rg: string = '', phone: string = '', birthDate: Date = new Date(), sexo: string = '', motherName: string = '', cpf: string = '', login: Login = new Login('', '')) {
+export default class User{
+  constructor(name: string, rg: string = '', phone: string = '', birthDate: Date = new Date(), gender: string = '', motherName: string = '', cpf: string = '', login: Login = new Login('', '')) {
     this.name = name;
     this.rg = rg;
     this.phone = phone;
     this.birthDate = birthDate;
-    this.sexo = sexo;
+    this.gender = gender;
     this.motherName = motherName;
     this.cpf = cpf;
     this.login = login;
@@ -17,7 +16,7 @@ export default class User {
   rg!: string;
   phone!: string;
   birthDate!: Date;
-  sexo!: string;
+  gender!: string;
   motherName!: string;
   cpf!: string;
   login!: Login;

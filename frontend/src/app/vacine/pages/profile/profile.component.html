@@ -6,51 +6,51 @@
   <form>
     <div class="row">
       <div class="col col-sm-6">
-        <app-textbox [(model)]="user.name" label="Nome"></app-textbox>
+        <app-text-field id="nome" [(model)]="user.name" label="Nome"></app-text-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-textbox [(model)]="user.cpf" label="CPF" mask="999.999.999-99" placeholder="___.___.___.__"></app-textbox>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-sm-6">
-        <app-textbox [(model)]="user.rg" label="RG"></app-textbox>
-      </div>
-
-      <div class="col col-sm-6">
-        <app-textbox [(model)]="user.phone" label="Telefone" mask="(99) 99999-9999" placeholder="(xx) xxxxx-xxxx"></app-textbox>
+        <app-text-field id="cpf" [(model)]="user.cpf" label="CPF" mask="999.999.999-99" placeholder="___.___.___.__"></app-text-field>
       </div>
     </div>
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-date-field [(model)]="user.birthDate" label="Data de Nascimento"></app-date-field>
+        <app-text-field id="rg" [(model)]="user.rg" label="RG"></app-text-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-textbox [(model)]="user.login.email" label="Email"></app-textbox>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-sm-6">
-        <app-textbox [(model)]="user.sexo" label="Sexo"></app-textbox>
-      </div>
-
-      <div class="col col-sm-6">
-        <app-textbox [(model)]="user.motherName" label="Nome da mãe"></app-textbox>
+        <app-text-field id="phone" [(model)]="user.phone" label="Telefone" mask="(99) 99999-9999" placeholder="(xx) xxxxx-xxxx"></app-text-field>
       </div>
     </div>
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-password-field id="senha" [(model)]="user.login.password" label="Senha"></app-password-field>
+        <app-date-field id="birthDate" [(model)]="user.birthDate" label="Data de Nascimento"></app-date-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-password-field id="confirmarSenha" [(model)]="user.login.password_confirmation" label="Confirmar Senha"></app-password-field>
+        <app-text-field id="email" [(model)]="user.login.email" label="Email"></app-text-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-text-field id="gender" [(model)]="user.gender" label="Sexo"></app-text-field>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-text-field id="motherName" [(model)]="user.motherName" label="Nome da mãe"></app-text-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-6">
+        <app-password-field id="password" [(model)]="user.login.password" label="Senha"></app-password-field>
+      </div>
+
+      <div class="col col-sm-6">
+        <app-password-field id="passwordConfirmation" [(model)]="user.login.password_confirmation" label="Confirmar Senha"></app-password-field>
       </div>
     </div>
 

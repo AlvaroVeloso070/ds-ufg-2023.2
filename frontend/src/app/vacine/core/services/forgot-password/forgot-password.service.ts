@@ -1,18 +1,13 @@
 import {Injectable} from '@angular/core';
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForgotPasswordService {
 
-  ref: DynamicDialogRef | undefined;
+  constructor() { }
 
-  constructor(dialogService: DialogService) { }
-
-  static sendEmail(email: string) {
-    alert('Email enviado para: ' + email);
-
-
+  sendEmail(email: string) {
+    console.log('Email enviado para: ' + email);
   }
 }

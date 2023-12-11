@@ -1,16 +1,16 @@
 <div class="sidenav">
   <div class="logo-container">
     <div class="logo">
-        <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
-        <span class="icon-title">Vacine</span>
+      <img class="icon" src="assets/vacine_icon.svg" alt="Vacine Icon">
+      <span class="icon-title">Vacine</span>
     </div>
   </div>
 
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let item of sideNavItems">
       <a href="" class="sidenav-nav-link" [routerLink]="item.route"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}">
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
 
         <fa-icon class="sidenav-link-icon" [icon]="item.icon"></fa-icon>
         <span class="sidenav-nav-link-text">{{item.label}}</span>

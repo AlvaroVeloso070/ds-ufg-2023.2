@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import Login from "../../entities/Login";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import User from "../../entities/User";
+import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
+import Login from "../../entities/login";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import User from "../../entities/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class LoginService {
 
   doLogin(login: Login) {
     console.log(login);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/vacine/home/appointments']);
   }
 
   getFormGroup() : FormGroup {
@@ -24,7 +24,7 @@ export class LoginService {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/vacine/login']);
   }
 
   getUsuarioLogado(){

@@ -27,7 +27,7 @@ body
 .p-datatable-thead
   background: $input-background-color !important
   color: #FFFFFF
-  
+
 .p-datatable-tbody
   background: $input-background-color !important
   color: #FFFFFF
@@ -44,7 +44,6 @@ body
   border-radius: 10px
 
 button
-  background-color: $primary-color
   border: none
 
 eyeicon, eyeslashicon
@@ -58,8 +57,18 @@ label
   width: 100%
 
 p-calendar
+
   input
     border-radius: 10px 0 0 10px !important
+
+  .p-datepicker
+    border: 1px solid $primary-color !important
+
+  .p-datepicker, .p-datepicker-header
+    background-color: $input-background-color
+
+  .p-datepicker-trigger
+    background: $primary-color
 
   button
     height: $input-height !important

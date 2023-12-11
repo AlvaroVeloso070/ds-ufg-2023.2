@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import Agenda from '../../entities/Agenda';
-import Vacina from '../../entities/Vacina';
+import Agenda from "../../entities/agenda";
+import Vacina from "../../entities/vacina";
 
 @Injectable({
   providedIn: 'root'
