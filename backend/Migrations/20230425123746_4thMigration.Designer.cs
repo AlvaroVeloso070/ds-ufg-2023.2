@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using vacinacao_backend.Repositories;
@@ -11,9 +12,11 @@ using vacinacao_backend.Repositories;
 namespace vacinacao_backend.Migrations
 {
     [DbContext(typeof(VacinacaoContext))]
-    partial class VacinacaoContextModelSnapshot : ModelSnapshot
+    [Migration("20230425123746_4thMigration")]
+    partial class _4thMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,10 +107,6 @@ namespace vacinacao_backend.Migrations
                     b.Property<DateOnly>("DataNascimento")
                         .HasColumnType("date");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
@@ -122,10 +121,6 @@ namespace vacinacao_backend.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Setor")
                         .IsRequired()
                         .HasColumnType("text");
@@ -138,9 +133,6 @@ namespace vacinacao_backend.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

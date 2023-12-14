@@ -28,6 +28,10 @@ namespace vacinacao_backend.Repositories {
             modelBuilder.Entity<Alergia>()
                 .HasMany(a => a.Usuarios)
                 .WithMany(u => u.Alergias);
+
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }

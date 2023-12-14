@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using vacinacao_backend.Repositories;
@@ -11,9 +12,11 @@ using vacinacao_backend.Repositories;
 namespace vacinacao_backend.Migrations
 {
     [DbContext(typeof(VacinacaoContext))]
-    partial class VacinacaoContextModelSnapshot : ModelSnapshot
+    [Migration("20230425135519_5thMigration")]
+    partial class _5thMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

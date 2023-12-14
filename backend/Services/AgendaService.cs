@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using vacinacao_backend.Exceptions;
 using vacinacao_backend.Models;
 using vacinacao_backend.Models.Enums;
 using vacinacao_backend.Repositories;
@@ -25,9 +26,36 @@ namespace vacinacao_backend.Services {
         }
 
         public async Task InsertAgendamento(Agenda agendamento) {
+            var usuario = await _vacinacaoContext.Usuarios.FindAsync(agendamento.UsuarioId);
+
+            if(usuario == null) {
+                throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
+            }
+            if(!usuario.IsUsuarioMaiorDeIdade()) {
+                throw new UsuarioMenorDeIdadeException("Usuário menor de idade não pode fazer agendamentos!");
+            }
+
+            var vacina = await _vacinacaoContext.Vacinas.FindAsync(agendamento.VacinaId);
+
+            if(vacina == null) {
+                throw new VacinaNaoEncontradaException("Vacina não encontrada!");
+            }
+
+            var agendamentosDaVacinaParaUsuario = _vacinacaoContext.Agendamentos.Where(a => a.VacinaId == agendamento.VacinaId && a.UsuarioId == agendamento.UsuarioId).ToList();
+
+            if(agendamentosDaVacinaParaUsuario.Any(a => a.Situacao == EnumSituacao.Agendado)) {
+                throw new AgendamentoInvalidoException("Não é possível agendar uma vacina para a qual o usuário já possui agendamentos");
+            }
+
+            int dosesRealizadas = agendamentosDaVacinaParaUsuario.Count(a => a.Situacao == EnumSituacao.Realizado);
+            if (vacina.Doses == dosesRealizadas) {
+                throw new AgendamentoInvalidoException("Não é possível agendar uma vacina para a qual o usuário já tomou todas as doses");
+            }
+
+            int dosesRestantes = vacina.Doses - dosesRealizadas;
+
             await _vacinacaoContext.Agendamentos.AddAsync(agendamento);
-            var vacina = await _vacinacaoContext.Vacinas.Where(v => v.Id == agendamento.VacinaId).FirstAsync();
-            for (int i = 1; i < vacina.Doses; i++) {
+            for (int i = 1; i < dosesRestantes; i++) {
                 var proximaData = agendamento.Data;
                 int novoIntervalo = vacina.Intervalo!.Value * i;
                 switch (vacina.Periodicidade) {
@@ -49,6 +77,7 @@ namespace vacinacao_backend.Services {
                 await _vacinacaoContext.Agendamentos.AddAsync(novaAgenda);
             }
             await _vacinacaoContext.SaveChangesAsync();
+            _vacinacaoContext.Agendamentos.Entry(agendamento).State = EntityState.Detached;
         }
 
         public async Task DeleteAgendamento(int id) {

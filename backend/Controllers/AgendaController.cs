@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using vacinacao_backend.Models;
 using vacinacao_backend.Models.Enums;
@@ -15,6 +16,7 @@ namespace vacinacao_backend.Controllers {
             _agendaService = agendaService;
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet]
         public async Task<ActionResult<List<Agenda>>> GetAllAgendamentos() {
             try {
@@ -26,6 +28,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet("situacao")]
         public async Task<ActionResult<List<Agenda>>> GetAgendamentosBySituacao(
             [FromQuery(Name = "situacao")][Required(ErrorMessage = "O queryparam situacao é obrigatório")] EnumSituacao situacao) {
@@ -38,6 +41,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet("data")]
         public async Task<ActionResult<List<Agenda>>> GetAgendamentosByData(
             [FromQuery(Name = "data")][Required(ErrorMessage = "O queryparam data é obrigatório")] DateTime data) {
@@ -50,6 +54,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostAgendamento([FromBody] Agenda agendamento) {
             try {
@@ -61,6 +66,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAgendamento(int id) {
             try {
@@ -72,6 +78,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpPut("situacao")]
         public async Task<ActionResult> PutSituacaoAgendamento(
             [FromQuery(Name = "id")][Required(ErrorMessage = "O queryparam id é obrigatório")] int id,

@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 using vacinacao_backend.Repositories;
 using vacinacao_backend.Services;
@@ -10,6 +13,28 @@ namespace vacinacao_backend {
 
             // Add services to the container.
 
+            builder.Services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.TokenValidationParameters = new TokenValidationParameters {
+                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"])),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };  
+            });
+
+            builder.Services.AddAuthorization(options => {
+                options.AddPolicy("AdminPolicy", p => {
+                    p.RequireClaim("isAdmin", "true");
+                });
+            });
+
             builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,6 +45,7 @@ namespace vacinacao_backend {
             builder.Services.AddScoped<AlergiaService>();
             builder.Services.AddScoped<VacinaService>();
             builder.Services.AddScoped<AgendaService>();
+            builder.Services.AddScoped<LoginService>();
             builder.Services.AddEntityFrameworkNpgsql().AddDbContext<VacinacaoContext>(options => { options.UseNpgsql(builder.Configuration.GetConnectionString("postgre")); });
 
             var app = builder.Build();
@@ -32,8 +58,8 @@ namespace vacinacao_backend {
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 

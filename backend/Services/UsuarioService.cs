@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using vacinacao_backend.Models;
+using vacinacao_backend.Models.DTOs;
 using vacinacao_backend.Repositories;
 
-namespace vacinacao_backend.Services {
+namespace vacinacao_backend.Services
+{
     public class UsuarioService {
 
         private readonly VacinacaoContext _vacinacaoContext;
@@ -16,7 +18,7 @@ namespace vacinacao_backend.Services {
         }
 
         public async Task<Usuario> FindUsuarioById(int id) {
-            var usuarioExists = _vacinacaoContext.Usuarios.Any(u => u.Id == id);
+            var usuarioExists = await _vacinacaoContext.Usuarios.AnyAsync(u => u.Id == id);
             if (!usuarioExists) {
                 throw new ArgumentException("Usuário não encontrado");
             }
@@ -27,7 +29,20 @@ namespace vacinacao_backend.Services {
 
         public async Task InsertUsuario(InsertUsuarioDTO usuarioDto) {
             var usuario = new Usuario(usuarioDto);
-            usuario.Alergias = await _vacinacaoContext.Alergias.AsNoTracking().Where(a => usuarioDto.Alergias.Contains(a.Id)).ToListAsync();
+            if (usuarioDto.Alergias != null && usuarioDto.Alergias.Any()) {
+                usuario.Alergias = await _vacinacaoContext.Alergias.AsNoTracking().Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
+            }
+            usuario.IsAdmin = false;
+            await _vacinacaoContext.Usuarios.AddAsync(usuario);
+            await _vacinacaoContext.SaveChangesAsync();
+            _vacinacaoContext.Usuarios.Entry(usuario).State = EntityState.Detached;
+        }
+
+        public async Task InsertUsuarioAdmin(InsertUsuarioDTO usuarioDto) {
+            var usuario = new Usuario(usuarioDto);
+            if (usuarioDto.Alergias != null && usuarioDto.Alergias.Any()) {
+                usuario.Alergias = await _vacinacaoContext.Alergias.AsNoTracking().Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
+            }
             await _vacinacaoContext.Usuarios.AddAsync(usuario);
             await _vacinacaoContext.SaveChangesAsync();
             _vacinacaoContext.Usuarios.Entry(usuario).State = EntityState.Detached;

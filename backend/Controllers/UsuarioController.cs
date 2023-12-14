@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using vacinacao_backend.Models;
+using vacinacao_backend.Models.DTOs;
 using vacinacao_backend.Services;
 
-namespace vacinacao_backend.Controllers {
+namespace vacinacao_backend.Controllers
+{
     [Route("[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase {
@@ -13,6 +16,7 @@ namespace vacinacao_backend.Controllers {
             _usuarioService = usuarioService;
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet]
         public async Task<ActionResult<List<Usuario>>> GetAllUsuarios() {
             try {
@@ -39,6 +43,18 @@ namespace vacinacao_backend.Controllers {
         public async Task<ActionResult> PostUsuario([FromBody] InsertUsuarioDTO usuario) {
             try {
                 await _usuarioService.InsertUsuario(usuario);
+                return StatusCode(201);
+            }
+            catch (Exception e) {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [Authorize(Policy = "AdminPolicy")]
+        [HttpPost("admin")]
+        public async Task<ActionResult> PostUsuarioAdmin([FromBody] InsertUsuarioDTO usuario) {
+            try {
+                await _usuarioService.InsertUsuarioAdmin(usuario);
                 return StatusCode(201);
             }
             catch (Exception e) {

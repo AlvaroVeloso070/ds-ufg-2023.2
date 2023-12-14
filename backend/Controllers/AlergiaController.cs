@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using vacinacao_backend.Models;
 using vacinacao_backend.Services;
 
@@ -24,6 +25,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpPost]
         public async Task<ActionResult> PostAlergia([FromBody] Alergia alergia) {
             try {
@@ -35,6 +37,7 @@ namespace vacinacao_backend.Controllers {
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAlergia(int id) {
             try {
