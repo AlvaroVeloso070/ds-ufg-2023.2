@@ -29,6 +29,13 @@ namespace vacinacao_backend.Repositories {
                 .HasMany(a => a.Usuarios)
                 .WithMany(u => u.Alergias);
 
+            modelBuilder.Entity<Alergia>()
+                .HasOne(a => a.Vacina)
+                .WithOne()
+                .HasForeignKey<Alergia>(a => a.VacinaId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Usuario>()
                 .HasIndex(u => u.Email)
                 .IsUnique();

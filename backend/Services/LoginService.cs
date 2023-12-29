@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BCrypt.Net;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
@@ -21,7 +22,10 @@ namespace vacinacao_backend.Services {
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO request) {
 			try {
-                var usuario = await _vacinacaoContext.Usuarios.Where(u => u.Email == request.Email && u.Senha == request.Senha).SingleAsync();
+                var usuario = await _vacinacaoContext.Usuarios.Where(u => u.Email == request.Email).SingleAsync();
+                if(!BCrypt.Net.BCrypt.EnhancedVerify(request.Senha, usuario.Senha)) {
+                    throw new AuthenticationException();
+                }
                 var response = new LoginResponseDTO { AccessToken = GenerateAccessToken(usuario) };
                 return response;
 			}

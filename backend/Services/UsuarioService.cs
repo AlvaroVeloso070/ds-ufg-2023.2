@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using vacinacao_backend.Exceptions;
 using vacinacao_backend.Models;
 using vacinacao_backend.Models.DTOs;
 using vacinacao_backend.Repositories;
@@ -29,8 +30,11 @@ namespace vacinacao_backend.Services
 
         public async Task InsertUsuario(InsertUsuarioDTO usuarioDto) {
             var usuario = new Usuario(usuarioDto);
+            if(await _vacinacaoContext.Usuarios.AnyAsync(u => u.Email == usuario.Email)) {
+                throw new EmailJaCadastradoException("Não é possível utilizar um email já cadastrado!");
+            }
             if (usuarioDto.Alergias != null && usuarioDto.Alergias.Any()) {
-                usuario.Alergias = await _vacinacaoContext.Alergias.AsNoTracking().Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
+                usuario.Alergias = await _vacinacaoContext.Alergias.Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
             }
             usuario.IsAdmin = false;
             await _vacinacaoContext.Usuarios.AddAsync(usuario);
@@ -40,8 +44,11 @@ namespace vacinacao_backend.Services
 
         public async Task InsertUsuarioAdmin(InsertUsuarioDTO usuarioDto) {
             var usuario = new Usuario(usuarioDto);
+            if (await _vacinacaoContext.Usuarios.AnyAsync(u => u.Email == usuario.Email)) {
+                throw new EmailJaCadastradoException("Não é possível utilizar um email já cadastrado!");
+            }
             if (usuarioDto.Alergias != null && usuarioDto.Alergias.Any()) {
-                usuario.Alergias = await _vacinacaoContext.Alergias.AsNoTracking().Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
+                usuario.Alergias = await _vacinacaoContext.Alergias.Where(a => usuarioDto.Alergias!.Contains(a.Id)).ToListAsync();
             }
             await _vacinacaoContext.Usuarios.AddAsync(usuario);
             await _vacinacaoContext.SaveChangesAsync();

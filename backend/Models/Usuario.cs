@@ -1,4 +1,6 @@
-﻿using vacinacao_backend.Models.DTOs;
+﻿using BCrypt.Net;
+using System.Text.Json.Serialization;
+using vacinacao_backend.Models.DTOs;
 
 namespace vacinacao_backend.Models
 {
@@ -14,6 +16,7 @@ namespace vacinacao_backend.Models
         public string UF { get; set; }
         public bool IsAdmin { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
         public string Senha { get; set; }
         public List<Agenda>? Agendamentos { get; set; }
         public List<Alergia>? Alergias { get; set; }
@@ -31,7 +34,7 @@ namespace vacinacao_backend.Models
             UF = dto.UF;
             IsAdmin = dto.IsAdmin;
             Email = dto.Email;
-            Senha = dto.Senha;
+            Senha = BCrypt.Net.BCrypt.EnhancedHashPassword(dto.Senha);
         }
 
         public int GetIdade() {

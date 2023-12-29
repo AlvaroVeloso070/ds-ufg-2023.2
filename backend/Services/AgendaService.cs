@@ -14,19 +14,19 @@ namespace vacinacao_backend.Services {
         }
 
         public async Task<List<Agenda>> FindAllAgendamentos() {
-            return await _vacinacaoContext.Agendamentos.ToListAsync();
+            return await _vacinacaoContext.Agendamentos.Include(a => a.Usuario).AsNoTracking().Include(a => a.Vacina).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<Agenda>> FindAgendamentosBySituacao(EnumSituacao situacao) {
-            return await _vacinacaoContext.Agendamentos.Where(a => a.Situacao == situacao).ToListAsync();
+            return await _vacinacaoContext.Agendamentos.Where(a => a.Situacao == situacao).Include(a => a.Usuario).AsNoTracking().Include(a => a.Vacina).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<Agenda>> FindAgendamentosByData(DateTime data) {
-            return await _vacinacaoContext.Agendamentos.Where(a => a.Data.Date == data.ToUniversalTime().Date).ToListAsync();
+            return await _vacinacaoContext.Agendamentos.Where(a => a.Data.Date == data.ToUniversalTime().Date).Include(a => a.Usuario).AsNoTracking().Include(a => a.Vacina).AsNoTracking().ToListAsync();
         }
 
         public async Task InsertAgendamento(Agenda agendamento) {
-            var usuario = await _vacinacaoContext.Usuarios.FindAsync(agendamento.UsuarioId);
+            var usuario = await _vacinacaoContext.Usuarios.AsNoTracking().Include(u => u.Alergias).AsNoTracking().FirstOrDefaultAsync(a => a.Id == agendamento.UsuarioId);
 
             if(usuario == null) {
                 throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
@@ -39,6 +39,10 @@ namespace vacinacao_backend.Services {
 
             if(vacina == null) {
                 throw new VacinaNaoEncontradaException("Vacina não encontrada!");
+            }
+
+            if (usuario.Alergias != null && usuario.Alergias.Any(a => a.VacinaId != null && a.VacinaId == vacina.Id)) {
+                throw new AgendamentoInvalidoException("Não é possível fazer o agendamento para uma vacina a qual o usuário tenha alergia");
             }
 
             var agendamentosDaVacinaParaUsuario = _vacinacaoContext.Agendamentos.Where(a => a.VacinaId == agendamento.VacinaId && a.UsuarioId == agendamento.UsuarioId).ToList();
