@@ -1,4 +1,4 @@
-import {faCalendarDays, faPlus, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCalendarDays, faPlus, faSyringe, faUser} from "@fortawesome/free-solid-svg-icons";
 
 export const navBarItems = [
   {
@@ -10,6 +10,26 @@ export const navBarItems = [
     label: 'Novo Agendamento',
     icon: faPlus,
     route: 'appointment/new'
+  },
+  {
+    label: 'Vacinas',
+    icon: faSyringe,
+    route: 'vaccine'
+  },
+  {
+    label: 'Nova Vacina',
+    icon: faPlus,
+    route: 'vaccine/new'
+  },
+  {
+    label: 'Alergias',
+    icon: faSyringe,
+    route: 'allergy'
+  },
+  {
+    label: 'Nova Alergia',
+    icon: faPlus,
+    route: 'allergy/new'
   },
   {
     label: 'Perfil',
