@@ -1,0 +1,8 @@
+<div class="dialogContent">
+  <p>Essa é uma ação irreversível, tem certeza que deseja deletar o registro?</p>
+
+  <div class="buttonRow">
+    <p-button [style]="{borderRadius: '5px'}" severity="danger" (click)="close()" label="Não"></p-button>
+    <p-button [style]="{borderRadius: '5px', marginLeft: '20px'}" class="button" severity="success" (click)="delete()" label="Sim"></p-button>
+  </div>
+</div>

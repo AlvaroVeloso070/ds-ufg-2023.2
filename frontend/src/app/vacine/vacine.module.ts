@@ -22,6 +22,8 @@ import {VaccinesComponent} from './pages/vaccines/vaccines.component';
 import {NewVaccineComponent} from './pages/new-vaccine/new-vaccine.component';
 import {AllergiesComponent} from './pages/allergies/allergies.component';
 import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
     VaccinesComponent,
     NewVaccineComponent,
     AllergiesComponent,
-    NewAllergyComponent
+    NewAllergyComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
     FormsModule,
     ReactiveFormsModule,
     FaIconComponent,
-    TableModule
+    TableModule,
+    ButtonModule
   ]
 })
 export class VacineModule {

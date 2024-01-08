@@ -25,8 +25,6 @@ export class AppointmentsComponent implements OnInit{
   }
 
   openInfoModal(appointment: Agenda){
-    console.log(appointment)
-
       this.ref = this.dialogService.open(AgendaInfoComponent, {
         header: 'Informações',
         width: '25%',
