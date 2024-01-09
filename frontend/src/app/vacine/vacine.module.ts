@@ -22,8 +22,11 @@ import {VaccinesComponent} from './pages/vaccines/vaccines.component';
 import {NewVaccineComponent} from './pages/new-vaccine/new-vaccine.component';
 import {AllergiesComponent} from './pages/allergies/allergies.component';
 import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
-import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import {DeleteDialogComponent} from './dialogs/delete-dialog/delete-dialog.component';
 import {ButtonModule} from "primeng/button";
+import {AuthService} from "./core/services/login/auth.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
 
 
 @NgModule({
@@ -52,7 +55,16 @@ import {ButtonModule} from "primeng/button";
     ReactiveFormsModule,
     FaIconComponent,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    HttpClientModule
+  ],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BearerInterceptor,
+      multi: true
+    }
   ]
 })
 export class VacineModule {
