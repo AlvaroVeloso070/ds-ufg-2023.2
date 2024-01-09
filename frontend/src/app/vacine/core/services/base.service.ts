@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "./login/auth.service";
 import {BaseServiceProvider} from "./base-service.provider";
 import {Injectable} from "@angular/core";
+import {Config} from "../config/config";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,7 @@ export abstract class BaseService{
   protected router: Router;
   protected authService: AuthService;
 
-  //TODO: corrigir erro do CongigService para que a url seja consultada do arquivo config.json
-  readonly apiUrl : string = 'https://api-vacinacao.onrender.com';
+  readonly apiUrl : string = Config.getApiUrl();
 
   readonly headers = new HttpHeaders({
     'Content-Type': 'application/json',
