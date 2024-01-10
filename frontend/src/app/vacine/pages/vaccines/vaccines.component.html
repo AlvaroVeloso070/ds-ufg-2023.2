@@ -1,10 +1,14 @@
+<p-blockUI [target]="table" [blocked]="yetToLoad">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
 <div>
   <div class="title">
     <h1>Vacinas Cadastradas</h1>
   </div>
 
   <div class="allAppointmentsTable">
-    <p-table [value]="vaccines" [tableStyle]="{'min-width': '80rem'}">
+    <p-table #table [value]="vaccines" [tableStyle]="{'min-width': '80rem'}">
       <ng-template pTemplate="caption">
         <div class="captionHeader">
           Vacinas:

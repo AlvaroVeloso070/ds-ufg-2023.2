@@ -15,6 +15,7 @@ export class VaccinesComponent implements OnInit {
   vaccines: Vacina[] = [];
 
   ref: DynamicDialogRef | undefined;
+  yetToLoad : boolean = true
 
   constructor(public service: VacinaService, public dialogService: DialogService) {
   }
@@ -34,6 +35,7 @@ export class VaccinesComponent implements OnInit {
     this.service.getVacinas().subscribe(
       (vaccines: Vacina[]) => {
         this.vaccines = vaccines;
+        this.yetToLoad = false;
       }
     );
   }

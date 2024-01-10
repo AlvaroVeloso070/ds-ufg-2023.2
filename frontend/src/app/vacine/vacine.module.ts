@@ -27,6 +27,8 @@ import {ButtonModule} from "primeng/button";
 import {AuthService} from "./core/services/login/auth.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
+import {BlockUIModule} from "primeng/blockui";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
     FaIconComponent,
     TableModule,
     ButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    BlockUIModule,
+    ProgressSpinnerModule
   ],
   providers: [
     AuthService,

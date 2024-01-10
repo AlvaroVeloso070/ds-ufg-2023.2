@@ -18,10 +18,15 @@ export class AppointmentsComponent implements OnInit{
   nextAppointment : Agenda[] = []
   allAppointments : Agenda[] = []
   ref: DynamicDialogRef | undefined;
+  yetToLoad : boolean = true
+  //TODO GET & BLOCKUI OVERLAY
 
   ngOnInit(): void {
     this.nextAppointment.push(this.agendaService.getNextAppointment(1))
-    this.allAppointments = this.agendaService.getAllAppointments(1)
+    this.agendaService.getAllAppointments().subscribe((appointments:Agenda[]) => {
+      this.allAppointments = appointments
+    })
+    this.yetToLoad = false
   }
 
   openInfoModal(appointment: Agenda){

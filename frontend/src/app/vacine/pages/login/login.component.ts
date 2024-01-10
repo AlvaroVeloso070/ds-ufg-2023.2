@@ -12,6 +12,7 @@ import {faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 export class LoginComponent implements OnInit{
 
   loginFormGroup!: FormGroup;
+  loginRequest : boolean = false
 
   constructor(private router: Router,
               private loginService: LoginService) {
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit{
 
   doLogin():void{
     if (this.loginFormGroup.valid){
+      this.loginRequest = true
       this.loginService.doLogin(this.loginFormGroup.value);
     }
   }

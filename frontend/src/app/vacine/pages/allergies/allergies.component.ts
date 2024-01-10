@@ -15,12 +15,14 @@ export class AllergiesComponent implements OnInit{
   allergies: Allergy[] = []
 
   ref: DynamicDialogRef | undefined
+  yetToLoad: boolean = true
 
   constructor(public service:AllergyService, public dialogService:DialogService) {
   }
 
   ngOnInit() {
     this.allergies = this.service.getAlergias()
+    this.yetToLoad = false
   }
 
   //TODO - MODAIS E CADASTRO DE ALERGIA
