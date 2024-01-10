@@ -20,7 +20,7 @@ export class VaccinesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vaccines = this.service.getVacinas();
+    this.carregarListagem();
   }
 
   protected readonly faEdit = faEdit;
@@ -28,6 +28,14 @@ export class VaccinesComponent implements OnInit {
 
   openEditModal(vaccine: Vacina) {
     console.log('vaccine', vaccine);
+  }
+
+  carregarListagem(){
+    this.service.getVacinas().subscribe(
+      (vaccines: Vacina[]) => {
+        this.vaccines = vaccines;
+      }
+    );
   }
 
   openDeleteModal(vaccine: Vacina) {
