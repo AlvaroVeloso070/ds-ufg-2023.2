@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import Login from "../../entities/login";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import User from "../../entities/user";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
 
@@ -10,19 +9,18 @@ import {BaseServiceProvider} from "../base-service.provider";
 })
 export class LoginService extends BaseService{
 
-  readonly endpoint : string = '/login';
-
   constructor(baseServiceProvider: BaseServiceProvider) {
-    super(baseServiceProvider);
+    super(baseServiceProvider, '/login');
   }
 
   doLogin(login: Login) {
-    this.post(this.endpoint, login).subscribe((response) => {
-      this.authService.setToken(response.accessToken);
-      this.authService.setIdUsuarioLogado(response.usuarioId);
+    this.post(login).subscribe((response) => {
+      this.authService.autenticarSessao(response);
       this.router.navigate(['/vacine/home/appointments']);
     });
   }
+
+
 
   getFormGroup() : FormGroup {
     return new FormBuilder().group({
@@ -33,9 +31,5 @@ export class LoginService extends BaseService{
 
   logout() {
     // this.router.navigate(['/vacine/login']);
-  }
-
-  getUsuarioLogado(){
-    return new User("Usuário Logado");
   }
 }

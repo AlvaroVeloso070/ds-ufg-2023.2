@@ -22,7 +22,7 @@
     <div class="sidenav-footer-item">
       <fa-icon class="sidenav-footer-icon" [icon]="faCircleUser"></fa-icon>
 
-      <span>{{usuarioLogado.name}}</span>
+      <span>{{usuarioLogado?.nome}}</span>
       <a href="" class="sidenav-footer-link" (click)="logout()">
         <fa-icon class="sidenav-footer-icon" [icon]="faSignOutAlt"></fa-icon>
       </a>

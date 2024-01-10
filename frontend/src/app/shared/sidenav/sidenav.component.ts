@@ -4,6 +4,7 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 import {navBarItems} from "./navBarItems";
 import {LoginService} from "../../vacine/core/services/login/login.service";
 import {MessageService} from "primeng/api";
+import {UserService} from "../../vacine/core/services/user/user.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -41,11 +42,13 @@ export class SidenavComponent implements OnInit{
 
   usuarioLogado!: any;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private userService : UserService) {
   }
 
   ngOnInit(): void {
-    this.usuarioLogado = this.loginService.getUsuarioLogado();
+    this.userService.getUsuarioLogado().subscribe((usuario) => {
+      this.usuarioLogado = usuario;
+    });
   }
 
   sideNavItems = navBarItems;

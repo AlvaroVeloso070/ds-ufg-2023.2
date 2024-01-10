@@ -16,7 +16,10 @@ export class ProfileComponent implements OnInit{
   genders: Gender[] = this.userService.getGenders();
 
   ngOnInit(): void {
-    this.user = this.userService.getUser(1);
+    this.userService.getUser(1).subscribe((user) => {
+      this.user = user;
+    });
+
     this.genders = this.userService.getGenders();
   }
 

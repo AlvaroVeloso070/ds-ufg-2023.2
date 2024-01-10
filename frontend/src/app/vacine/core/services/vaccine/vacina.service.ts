@@ -10,11 +10,11 @@ import {map, Observable} from "rxjs";
 export class VacinaService extends BaseService {
 
   constructor(private baseServiceProvider: BaseServiceProvider) {
-    super(baseServiceProvider);
+    super(baseServiceProvider, '/vacina');
   }
 
   getVacinas(): Observable<Vacina[]> {
-    return this.get('/vacina').pipe(
+    return this.get().pipe(
       map((response: any) => {
         return response.map((vacina: any) => {
           return new Vacina(vacina.id, vacina.titulo, vacina.doses, vacina.descricao, vacina.periodicidade, vacina.intervalo);

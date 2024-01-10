@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import User from "../../entities/user";
-import Login from "../../entities/login";
 import Gender from "../../entities/gender";
+import {BaseService} from "../base.service";
+import {BaseServiceProvider} from "../base-service.provider";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService{
 
-  constructor() { }
+  constructor(private baseServiceProvider : BaseServiceProvider) {
+    super(baseServiceProvider,  '/usuario');
+  }
 
   getFormGroup(): FormGroup {
     return new FormBuilder().group({
@@ -26,15 +30,18 @@ export class UserService {
     });
   }
 
-  getUser(id: number) : User {
-    return new User("Usuário Logado", "123456789", "62940028922", new Date(), "M", "Mãe", "628.913.950-93", new Login("email@email.com", "senha123", "senha123"));
+  getUser(id: number) : Observable<User> {
+    return this.getById(id);
+  }
+
+  getUsuarioLogado(): Observable<User> {
+    return this.getUser(this.authService.getIdUsuarioLogado());
   }
 
   getGenders(): Gender[]{
     return [
-      new Gender('M', 'Masculino'),
-      new Gender('F', 'Feminino'),
-      new Gender('O', 'Outro')
+      new Gender('m', 'Masculino'),
+      new Gender('f', 'Feminino')
     ];
   }
 }

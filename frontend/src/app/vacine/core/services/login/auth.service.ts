@@ -5,27 +5,30 @@ import {Injectable} from '@angular/core';
 })
 export class AuthService {
 
-  private token: string | null = null;
-  private idUsuarioLogado: number | null = null;
-
   setToken(token: string) {
-    this.token = token;
+    sessionStorage.setItem('token', token);
   }
 
   getToken(): string | null {
-    return this.token;
+    return sessionStorage.getItem('token');
   }
 
   setIdUsuarioLogado(idUsuarioLogado: number) {
-    this.idUsuarioLogado = idUsuarioLogado;
+    sessionStorage.setItem('idUsuarioLogado', idUsuarioLogado.toString());
   }
 
-  getIdUsuarioLogado(): number | null {
-    return this.idUsuarioLogado;
+  getIdUsuarioLogado(): number{
+    return Number(sessionStorage.getItem('idUsuarioLogado'));
   }
 
   isAuthenticated(): boolean {
-    return !!this.token;
+    return !!this.getToken();
   }
+
+  autenticarSessao(response : any) {
+    this.setToken(response.accessToken);
+    this.setIdUsuarioLogado(response.usuarioId);
+  }
+
   constructor() { }
 }

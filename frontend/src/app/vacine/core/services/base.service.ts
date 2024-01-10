@@ -13,35 +13,38 @@ export abstract class BaseService{
   protected router: Router;
   protected authService: AuthService;
 
+  private endpoint : string | null = null
+
   readonly apiUrl : string = Config.getApiUrl();
 
   readonly headers = new HttpHeaders({
     'Content-Type': 'application/json',
   })
 
-  protected constructor(baseServiceProvider: BaseServiceProvider) {
+  protected constructor(baseServiceProvider: BaseServiceProvider, endpoint : string) {
     this.http = baseServiceProvider.getHttp();
     this.router = baseServiceProvider.getRouter();
     this.authService = baseServiceProvider.getAuthService();
+    this.endpoint = endpoint;
   }
 
-  protected get(endpoint: string) {
-    return this.http.get<any>(this.apiUrl + endpoint, {headers: this.headers});
+  protected get() {
+    return this.http.get<any>(this.apiUrl + this.endpoint, {headers: this.headers});
   }
 
-  protected getById(endpoint: string, id: number) {
-    return this.http.get<any>(this.apiUrl + endpoint + '/' + id, {headers: this.headers});
+  protected getById(id: number) {
+    return this.http.get<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers});
   }
 
-  protected post(endpoint: string, body: any) {
-    return this.http.post<any>(this.apiUrl + endpoint, body, {headers: this.headers});
+  protected post(body: any) {
+    return this.http.post<any>(this.apiUrl + this.endpoint, body, {headers: this.headers});
   }
 
-  protected put(endpoint: string, body: any) {
-    return this.http.put<any>(this.apiUrl + endpoint, body, {headers: this.headers});
+  protected put(body: any) {
+    return this.http.put<any>(this.apiUrl + this.endpoint, body, {headers: this.headers});
   }
 
-  protected delete(endpoint: string, id: number) {
-    return this.http.delete<any>(this.apiUrl + endpoint + '/' + id, {headers: this.headers});
+  protected delete(id: number) {
+    return this.http.delete<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers});
   }
 }
