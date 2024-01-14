@@ -25,8 +25,7 @@ import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
 import {DeleteDialogComponent} from './dialogs/delete-dialog/delete-dialog.component';
 import {ButtonModule} from "primeng/button";
 import {AuthService} from "./core/services/login/auth.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
+import {HttpClientModule} from "@angular/common/http";
 import {BlockUIModule} from "primeng/blockui";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 
@@ -63,12 +62,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     ProgressSpinnerModule
   ],
   providers: [
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: BearerInterceptor,
-      multi: true
-    }
+    AuthService
   ]
 })
 export class VacineModule {
