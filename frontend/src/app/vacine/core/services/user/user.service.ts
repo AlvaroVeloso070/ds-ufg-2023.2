@@ -4,7 +4,7 @@ import User from "../../entities/user";
 import Gender from "../../entities/gender";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
-import {Observable} from "rxjs";
+import {catchError, from, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,23 @@ export class UserService extends BaseService{
   }
 
   getUsuarioLogado(): Observable<User> {
-    return this.getUser(this.authService.getIdUsuarioLogado());
+    const cachedUser = sessionStorage.getItem('usuarioLogado');
+
+    if (cachedUser) {
+      return new Observable<User>(subscriber => {
+        subscriber.next(JSON.parse(cachedUser));
+      });
+    } else {
+      return from(this.getUser(this.authService.getIdUsuarioLogado())).pipe(
+        map((usuario: User) => {
+          sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+          return usuario;
+        }),
+        catchError(error => {
+          return new Observable<User>();
+        })
+      );
+    }
   }
 
   getGenders(): Gender[]{

@@ -45,6 +45,7 @@ export class SidenavComponent implements OnInit{
 
   ngOnInit(): void {
     this.userService.getUsuarioLogado().subscribe((usuario) => {
+      console.log('usuario', usuario)
       this.usuarioLogado = usuario;
     });
   }

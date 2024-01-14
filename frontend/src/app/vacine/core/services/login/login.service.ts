@@ -3,20 +3,30 @@ import Login from "../../entities/login";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
+import {UserService} from "../user/user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends BaseService{
 
-  constructor(baseServiceProvider: BaseServiceProvider) {
+  constructor(baseServiceProvider: BaseServiceProvider, private userService : UserService) {
     super(baseServiceProvider, '/login');
   }
 
   doLogin(login: Login) {
-    this.post(login).subscribe((response) => {
-      this.authService.autenticarSessao(response);
-      this.router.navigate(['/vacine/home/appointments']);
+    this.http.post(this.apiUrl + this.endpoint, login).subscribe({
+      next: data => {
+        this.authService.autenticarSessao(data);
+        this.userService.getUsuarioLogado().subscribe((usuario) => {
+          this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Login realizado com sucesso. Bem vindo(a), ' + usuario.nome + '!'});
+        });
+        this.router.navigate(['/vacine/home/appointments']);
+      },
+      error: error => {
+        console.log(error)
+        this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao realizar o login: ' + error.error});
+      }
     });
   }
 

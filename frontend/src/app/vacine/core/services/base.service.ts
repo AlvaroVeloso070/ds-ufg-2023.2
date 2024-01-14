@@ -5,6 +5,7 @@ import {BaseServiceProvider} from "./base-service.provider";
 import {Injectable} from "@angular/core";
 import {Config} from "../config/config";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {catchError, map, Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export abstract class BaseService{
   protected confirmationService : ConfirmationService;
   protected messageService : MessageService;
 
-  private endpoint : string | null = null
+  protected endpoint : string | null = null
 
   readonly apiUrl : string = Config.getApiUrl();
 
@@ -33,21 +34,60 @@ export abstract class BaseService{
     this.endpoint = endpoint;
   }
 
-  protected get() {
-    return this.http.get<any>(this.apiUrl + this.endpoint, {headers: this.headers});
+  get(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + this.endpoint, {headers: this.headers})
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao consultar os registros.'});
+          return throwError(error); // Propaga o erro para quem chama
+        })
+      );
   }
 
-  protected getById(id: number) {
-    return this.http.get<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers});
+  protected getById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}${this.endpoint}/${id}`, {headers: this.headers})
+      .pipe(
+        map(data => data),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao consultar o registro.'});
+          return throwError(error);
+        })
+      );
   }
 
-  protected post(body: any) {
-    return this.http.post<any>(this.apiUrl + this.endpoint, body, {headers: this.headers});
+
+  protected post(body: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}${this.endpoint}`, body, {headers: this.headers})
+      .pipe(
+        map(data => {
+          this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Registro cadastrado com sucesso!'});
+          return data;
+        }),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao cadastrar o registro.'});
+          return throwError(error);
+        })
+      );
   }
 
-  protected put(body: any) {
-    return this.http.put<any>(this.apiUrl + this.endpoint, body, {headers: this.headers});
+
+  protected put(body: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}${this.endpoint}`, body, {headers: this.headers})
+      .pipe(
+        map(data => {
+          this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Registro atualizado com sucesso!'});
+          return data;
+        }),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao atualizar o registro.'});
+          return throwError(error);
+        })
+      );
   }
+
 
   protected delete(id: number, funcaoListar: any) {
     this.http.delete<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers}).subscribe({
