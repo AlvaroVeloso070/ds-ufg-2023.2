@@ -31,4 +31,8 @@ export class AuthService {
   }
 
   constructor() { }
+
+  logout() {
+    sessionStorage.clear()
+  }
 }

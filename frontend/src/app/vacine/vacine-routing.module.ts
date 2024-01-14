@@ -12,20 +12,21 @@ import {VaccinesComponent} from "./pages/vaccines/vaccines.component";
 import {NewVaccineComponent} from "./pages/new-vaccine/new-vaccine.component";
 import {AllergiesComponent} from "./pages/allergies/allergies.component";
 import {NewAllergyComponent} from "./pages/new-allergy/new-allergy.component";
+import {authGuard} from "./auth.guard";
 
 const routes: Routes = [{ path: '', component: VacineComponent, children: [
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'home', component: HomeComponent,
+  {path: 'home', component: HomeComponent, canActivate: [authGuard],
     children:[
-      {path: 'appointments', component: AppointmentsComponent},
-      {path: 'profile', component: ProfileComponent},
-      {path: 'appointment/new', component: NewAppointmentComponent},
-      {path: 'vaccine', component: VaccinesComponent},
-      {path: 'vaccine/new', component: NewVaccineComponent},
-      {path: 'allergy', component: AllergiesComponent},
-      {path: 'allergy/new', component: NewAllergyComponent},
+      {path: 'appointments', component: AppointmentsComponent, canActivate: [authGuard]},
+      {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+      {path: 'appointment/new', component: NewAppointmentComponent, canActivate: [authGuard]},
+      {path: 'vaccine', component: VaccinesComponent, canActivate: [authGuard]},
+      {path: 'vaccine/new', component: NewVaccineComponent, canActivate: [authGuard]},
+      {path: 'allergy', component: AllergiesComponent, canActivate: [authGuard]},
+      {path: 'allergy/new', component: NewAllergyComponent, canActivate: [authGuard]},
     ]},
   {path: '**', redirectTo: 'login'}
 ]}];

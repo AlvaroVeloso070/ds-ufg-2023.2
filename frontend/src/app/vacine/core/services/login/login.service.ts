@@ -30,6 +30,7 @@ export class LoginService extends BaseService{
   }
 
   logout() {
-    // this.router.navigate(['/vacine/login']);
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
