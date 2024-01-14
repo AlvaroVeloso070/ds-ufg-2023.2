@@ -21,7 +21,7 @@
         <tr class="tableRow">
           <td class="firstCell">{{appointment.data | date:'short' }}</td>
           <td>{{appointment.vacina.titulo}}</td>
-          <td>{{appointment.vacina.dose}}</td>
+          <td>{{appointment.vacina.doses}}</td>
           <td>
             <a class="searchIcon" (click)="openInfoModal(appointment)">
               <fa-icon [icon]="faSearch"></fa-icon>

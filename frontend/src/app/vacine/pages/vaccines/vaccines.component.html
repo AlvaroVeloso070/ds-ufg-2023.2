@@ -28,7 +28,7 @@
       <ng-template pTemplate="body" let-vaccine>
         <tr class="tableRow">
           <td class="firstCell">{{vaccine.titulo}}</td>
-          <td>{{vaccine.descricao}}</td>
+          <td>{{vaccine.descricao ? vaccine.descricao : '-'}}</td>
           <td>{{vaccine.doses}}</td>
           <td>{{vaccine.intervalo + ' ' + vaccine.periodicidade}}</td>
           <td>
@@ -36,9 +36,8 @@
               <a class="icons" (click)="openEditModal(vaccine)">
                 <fa-icon [icon]="faEdit"></fa-icon>
               </a>
-              <a class="icons" (click)="openDeleteModal(vaccine)">
-                <fa-icon [icon]="faTrash"></fa-icon>
-              </a>
+
+              <app-delete-btn [id]="vaccine.id" [service]="service" [funcaoListar]="listarVacinas"></app-delete-btn>
             </div>
           </td>
         </tr>

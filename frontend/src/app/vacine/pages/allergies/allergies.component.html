@@ -26,15 +26,14 @@
       <ng-template pTemplate="body" let-allergy>
         <tr class="tableRow">
           <td class="firstCell">{{allergy.nome}}</td>
-          <td>{{allergy.vacina.titulo}}</td>
+          <td>{{allergy.vacina ? allergy.vacina : '-'}}</td>
           <td>
             <div class="iconsCell">
               <a class="icons" (click)="openEditModal(allergy)">
                 <fa-icon [icon]="faEdit"></fa-icon>
               </a>
-              <a class="icons" (click)="openDeleteModal(allergy)">
-                <fa-icon [icon]="faTrash"></fa-icon>
-              </a>
+
+              <app-delete-btn [id]="allergy.id" [service]="service" [funcaoListar]="listarAlergias"></app-delete-btn>
             </div>
           </td>
         </tr>

@@ -3,14 +3,12 @@ import {faCircleUser, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
 import {navBarItems} from "./navBarItems";
 import {LoginService} from "../../vacine/core/services/login/login.service";
-import {MessageService} from "primeng/api";
 import {UserService} from "../../vacine/core/services/user/user.service";
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.sass',
-  providers: [MessageService],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [

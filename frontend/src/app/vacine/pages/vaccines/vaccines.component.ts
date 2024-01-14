@@ -3,7 +3,6 @@ import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import Vacina from "../../core/entities/vacina";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
-import {DeleteDialogComponent} from "../../dialogs/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-vaccines',
@@ -21,7 +20,7 @@ export class VaccinesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carregarListagem();
+    this.listarVacinas();
   }
 
   protected readonly faEdit = faEdit;
@@ -31,24 +30,12 @@ export class VaccinesComponent implements OnInit {
     console.log('vaccine', vaccine);
   }
 
-  carregarListagem(){
+  listarVacinas(){
     this.service.getVacinas().subscribe(
       (vaccines: Vacina[]) => {
         this.vaccines = vaccines;
         this.yetToLoad = false;
       }
     );
-  }
-
-  openDeleteModal(vaccine: Vacina) {
-    this.ref = this.dialogService.open(DeleteDialogComponent, {
-      header: 'Excluir',
-      dismissableMask: true,
-      closable: false,
-      data: {
-        vaccine: vaccine
-      }
-    });
-
   }
 }

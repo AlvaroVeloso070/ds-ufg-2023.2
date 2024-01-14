@@ -9,7 +9,6 @@ import Agenda from "../../core/entities/agenda";
 })
 export class AgendaInfoComponent implements OnInit{
   constructor(public ref: DynamicDialogRef, public config : DynamicDialogConfig) {
-    console.log(this.config.data)
   }
 
   agenda !: Agenda

@@ -1,11 +1,11 @@
-import Vacina from "./vacina";
-
 export default class Allergy{
-  nome !: string
-  vacina !: Vacina
+  id !: number;
+  nome !: string;
+  vacina !: string;
 
-  constructor(nome:string, vacina:Vacina) {
-    this.nome = nome
-    this.vacina = vacina
+  constructor(id:number, nome:string, vacina:string) {
+    this.id = id;
+    this.nome = nome;
+    this.vacina = vacina;
   }
 }

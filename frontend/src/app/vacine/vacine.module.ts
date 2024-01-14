@@ -22,12 +22,13 @@ import {VaccinesComponent} from './pages/vaccines/vaccines.component';
 import {NewVaccineComponent} from './pages/new-vaccine/new-vaccine.component';
 import {AllergiesComponent} from './pages/allergies/allergies.component';
 import {NewAllergyComponent} from './pages/new-allergy/new-allergy.component';
-import {DeleteDialogComponent} from './dialogs/delete-dialog/delete-dialog.component';
 import {ButtonModule} from "primeng/button";
 import {AuthService} from "./core/services/login/auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
 import {BlockUIModule} from "primeng/blockui";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -46,7 +47,6 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     NewVaccineComponent,
     AllergiesComponent,
     NewAllergyComponent,
-    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -59,10 +59,16 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     ButtonModule,
     HttpClientModule,
     BlockUIModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ConfirmDialogModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BearerInterceptor,
+      multi: true
+    }
   ]
 })
 export class VacineModule {

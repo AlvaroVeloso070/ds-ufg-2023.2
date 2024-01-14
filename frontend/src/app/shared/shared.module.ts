@@ -1,24 +1,26 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DateFieldComponent } from './date-field/date-field.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DateFieldComponent} from './date-field/date-field.component';
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
-import { LogoComponent } from './logo/logo.component';
-import { PasswordFieldComponent } from './password-field/password-field.component';
+import {LogoComponent} from './logo/logo.component';
+import {PasswordFieldComponent} from './password-field/password-field.component';
 import {PasswordModule} from "primeng/password";
-import { PrimaryBtnComponent } from './primary-btn/primary-btn.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import {PrimaryBtnComponent} from './primary-btn/primary-btn.component';
+import {SidenavComponent} from './sidenav/sidenav.component';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import { TextFieldComponent } from './text-field/text-field.component';
+import {TextFieldComponent} from './text-field/text-field.component';
 import {InputMaskModule} from "primeng/inputmask";
-import { BaseFieldComponent } from './base-field.component';
+import {BaseFieldComponent} from './base-field.component';
 import {InputTextModule} from "primeng/inputtext";
-import { CheckboxFieldComponent } from './checkbox-field/checkbox-field.component';
+import {CheckboxFieldComponent} from './checkbox-field/checkbox-field.component';
 import {CheckboxModule} from "primeng/checkbox";
-import { DropdownFieldComponent } from './dropdown-field/dropdown-field.component';
+import {DropdownFieldComponent} from './dropdown-field/dropdown-field.component';
 import {DropdownModule} from "primeng/dropdown";
-
+import {DeleteBtnComponent} from './delete-btn/delete-btn.component';
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -31,18 +33,20 @@ import {DropdownModule} from "primeng/dropdown";
     TextFieldComponent,
     BaseFieldComponent,
     CheckboxFieldComponent,
-    DropdownFieldComponent
+    DropdownFieldComponent,
+    DeleteBtnComponent
   ],
-    exports: [
-        TextFieldComponent,
-        PrimaryBtnComponent,
-        PasswordFieldComponent,
-        DateFieldComponent,
-        LogoComponent,
-        SidenavComponent,
-        CheckboxFieldComponent,
-        DropdownFieldComponent
-    ],
+  exports: [
+    TextFieldComponent,
+    PrimaryBtnComponent,
+    PasswordFieldComponent,
+    DateFieldComponent,
+    LogoComponent,
+    SidenavComponent,
+    CheckboxFieldComponent,
+    DropdownFieldComponent,
+    DeleteBtnComponent
+  ],
   imports: [
     CommonModule,
     CalendarModule,
@@ -54,7 +58,9 @@ import {DropdownModule} from "primeng/dropdown";
     InputMaskModule,
     InputTextModule,
     CheckboxModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class SharedModule { }

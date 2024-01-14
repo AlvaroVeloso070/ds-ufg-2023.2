@@ -3,7 +3,6 @@ import Allergy from "../../core/entities/Allergy";
 import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {DeleteDialogComponent} from "../../dialogs/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-allergies',
@@ -21,25 +20,22 @@ export class AllergiesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.allergies = this.service.getAlergias()
+    this.listarAlergias();
     this.yetToLoad = false
+  }
+
+  listarAlergias() {
+    this.service.getAlergias().subscribe(
+      (allergies: Allergy[]) => {
+        this.allergies = allergies
+      }
+    )
   }
 
   //TODO - MODAIS E CADASTRO DE ALERGIA
 
   openEditModal(allergy : Allergy){
     console.log('allergy', allergy)
-  }
-
-  openDeleteModal(allergy : Allergy){
-    this.ref = this.dialogService.open(DeleteDialogComponent, {
-      header: 'Excluir',
-      dismissableMask: true,
-      closable: false,
-      data: {
-        allergy: allergy
-      }
-    })
   }
 
   protected readonly faEdit = faEdit;
