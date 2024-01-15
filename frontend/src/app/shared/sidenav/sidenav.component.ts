@@ -52,7 +52,10 @@ export class SidenavComponent implements OnInit{
 
   podeVerMenu(item: any) {
     if (item.onlyAdmin) {
-      return this.usuarioLogado.isAdmin;
+      if(this.usuarioLogado.isAdmin != undefined){
+        return this.usuarioLogado.isAdmin;
+      }
+      else return false
     }
     return true;
   }

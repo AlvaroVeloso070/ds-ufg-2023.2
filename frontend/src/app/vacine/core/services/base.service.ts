@@ -47,8 +47,8 @@ export abstract class BaseService{
       );
   }
 
-  getWithParams(params : any) : Observable<any>{
-    return this.http.get<any>(this.apiUrl + this.endpoint, {headers: this.headers, params: params})
+  getAppointmentsWithParams(params : any) : Observable<any>{
+    return this.http.get<any>(this.apiUrl + this.endpoint + '/usuario', {headers: this.headers, params: params})
       .pipe(
         map(data => {
           return data;

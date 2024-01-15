@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <ul class="sidenav-nav">
+  <ul class="sidenav-nav" *ngIf="usuarioLogado">
     <li class="sidenav-nav-item" *ngFor="let item of sideNavItems">
       <a *ngIf="podeVerMenu(item)" href="" class="sidenav-nav-link" [routerLink]="item.route"
          routerLinkActive="active"

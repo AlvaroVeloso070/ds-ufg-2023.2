@@ -15,31 +15,39 @@ export class AgendaService extends BaseService{
     super(baseServiceProvider, '/agenda');
   }
 
-  getNextAppointment(userId : number){
-    return new Agenda(new Date(), 1, new Vacina(2,'Coronavac', 2), userId)
+  getNextAppointment(appointments : Agenda[]) : any{
+    appointments = appointments.filter((item:any) => {
+      let dataAp = new Date(item.data)
+      return dataAp >= new Date()
+    }).sort((agendaA, agendaB) => {
+      let dataA = new Date(agendaA.data)
+      let dataB = new Date(agendaB.data)
+
+      return dataA.getTime() - dataB.getTime()
+    })
+
+    return appointments[0]
   }
 
-  getAllAppointments():Observable<Agenda[]>{
-    return this.get().pipe(
-      map((response:any) => {
-        return response.map((agenda:any) => {
-          let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, agenda.vacina.doses, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
-          return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuario.id)
-        })
-      })
-    )
+  getPastAppointments(appointments : Agenda[]):Agenda[]{
+    appointments = appointments.filter((item:any) => {
+      let dataAp = new Date(item.data)
+      return dataAp <= new Date()
+    })
+
+    return appointments
   }
 
   getUserAppointments(id: number):Observable<Agenda[]>{
     let params = {
-      usuarioId: id
+      "usuarioId": id
     }
 
-    return this.getWithParams(params).pipe(
+    return this.getAppointmentsWithParams(params).pipe(
       map((response:any) => {
         return response.map((agenda:any) => {
           let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, agenda.vacina.doses, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
-          return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuario.id)
+          return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuarioId)
         })
       })
     )

@@ -25,12 +25,11 @@ export class AppointmentsComponent implements OnInit{
   ngOnInit(): void {
     this.userService.getUsuarioLogado().subscribe((usuarioLogado) => {
       this.usuarioLogado = usuarioLogado
-    })
-
-    this.nextAppointment.push(this.agendaService.getNextAppointment(1))
-    this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
-      this.allAppointments = appointments
-      this.yetToLoad = false
+      this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
+        this.allAppointments = this.agendaService.getPastAppointments(appointments)
+        this.nextAppointment.push(this.agendaService.getNextAppointment(appointments));
+        this.yetToLoad = false
+      })
     })
   }
 
