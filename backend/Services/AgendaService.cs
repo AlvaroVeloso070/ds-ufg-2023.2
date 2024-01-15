@@ -102,5 +102,9 @@ namespace vacinacao_backend.Services {
             agendamento.DataSituacao = DateTime.UtcNow;
             await _vacinacaoContext.SaveChangesAsync();
         }
+
+        public async Task<List<Agenda>> FindAgendamentosByUsuario(int usuarioId) {
+            return await _vacinacaoContext.Agendamentos.Where(a => a.UsuarioId == usuarioId).Include(a => a.Vacina).AsNoTracking().ToListAsync();
+        }
     }
 }
