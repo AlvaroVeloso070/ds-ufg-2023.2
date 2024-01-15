@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {OverlayService} from "./vacine/core/services/overlay/overlay.service";
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,9 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  loadRequest: boolean = false
+
+  constructor(private service : OverlayService) {
+    this.service.overlayState$.subscribe(state => this.loadRequest = state)
+  }
 }

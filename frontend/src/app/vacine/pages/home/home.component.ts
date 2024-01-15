@@ -1,5 +1,4 @@
 import {Component, } from '@angular/core';
-import {OverlayService} from "../../core/services/overlay/overlay.service";
 
 @Component({
   selector: 'app-home',
@@ -7,11 +6,4 @@ import {OverlayService} from "../../core/services/overlay/overlay.service";
   styleUrl: './home.component.sass'
 })
 export class HomeComponent{
-  loadRequest : boolean = false
-
-  constructor(private service : OverlayService) {
-    this.service.overlayState$.subscribe(state => this.loadRequest = state)
-  }
-
-
 }

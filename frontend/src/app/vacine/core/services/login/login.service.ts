@@ -21,8 +21,8 @@ export class LoginService extends BaseService{
         this.authService.autenticarSessao(data);
         this.userService.getUsuarioLogado().subscribe((usuario) => {
           this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Login realizado com sucesso. Bem vindo(a), ' + usuario.nome + '!'});
+          this.overlayService.updateOverlayState(false)
         });
-        this.overlayService.updateOverlayState(false)
         this.router.navigate(['/vacine/home/appointments']);
       },
       error: error => {
