@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DateFieldComponent} from './date-field/date-field.component';
 import {CalendarModule} from "primeng/calendar";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LogoComponent} from './logo/logo.component';
 import {PasswordFieldComponent} from './password-field/password-field.component';
 import {PasswordModule} from "primeng/password";
@@ -21,6 +21,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {DeleteBtnComponent} from './delete-btn/delete-btn.component';
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {NumberFieldComponent} from './number-field/number-field.component';
+import {InputNumberModule} from "primeng/inputnumber";
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     BaseFieldComponent,
     CheckboxFieldComponent,
     DropdownFieldComponent,
-    DeleteBtnComponent
+    DeleteBtnComponent,
+    NumberFieldComponent
   ],
   exports: [
     TextFieldComponent,
@@ -45,7 +48,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     SidenavComponent,
     CheckboxFieldComponent,
     DropdownFieldComponent,
-    DeleteBtnComponent
+    DeleteBtnComponent,
+    NumberFieldComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +64,9 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     CheckboxModule,
     DropdownModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule,
+    InputNumberModule
   ]
 })
 export class SharedModule { }

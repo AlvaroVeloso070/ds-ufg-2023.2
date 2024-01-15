@@ -1,10 +1,9 @@
-<div class="textfield">
+<div class="textfield" [formGroup]="formGroup">
   <label [for]="id">{{label}}</label>
   <input *ngIf="!mask" pInputText
          [id]="id"
-         [(ngModel)]="model"
-         (ngModelChange)="modelChange.emit($event)"
          [placeholder]="placeholder"
+         [formControlName]="name"
          [required]="required"
          [readOnly]="readonly"
          [disabled]="disabled"/>
@@ -12,8 +11,7 @@
   <p-inputMask *ngIf="mask"
                [id]="id"
                mask="{{mask}}"
-               [(ngModel)]="model"
-               (ngModelChange)="modelChange.emit($event)"
+               [formControlName]="name"
                [placeholder]="placeholder"
                [required]="required"
                [readonly]="readonly"

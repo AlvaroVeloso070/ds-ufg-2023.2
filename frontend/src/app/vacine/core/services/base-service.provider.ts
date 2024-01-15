@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthService} from "./login/auth.service";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {FormBuilder} from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class BaseServiceProvider{
     private router: Router,
     private authService: AuthService,
     private confirmationService: ConfirmationService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private formBuilder : FormBuilder
   ) {
   }
 
@@ -35,5 +37,9 @@ export class BaseServiceProvider{
 
   public getMessageService() {
     return this.messageService;
+  }
+
+  public getFormBuilder() {
+    return this.formBuilder;
   }
 }

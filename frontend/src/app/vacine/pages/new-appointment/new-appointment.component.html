@@ -1,4 +1,4 @@
-<div class="new-appointment-container">
+<form class="new-appointment-container" [formGroup]="formGroup">
   <div class="title">
     <h2>Novo Agendamento</h2>
   </div>
@@ -6,33 +6,20 @@
   <form>
     <div class="row">
       <div>
-        <app-dropdown-field label="Qual vacina?" name="vacina" placeholder="Coronavirus"></app-dropdown-field>
-        <app-checkbox-field label="Nova dose?" name="novaDose" [(model)]="novaDose"></app-checkbox-field>
+        <app-dropdown-field [formGroup]="formGroup" label="Qual vacina?" name="vacina" [options]="vacinas" optionLabel="titulo"></app-dropdown-field>
       </div>
     </div>
 
     <div class="row">
       <div>
-        <app-dropdown-field label="Selecione a Dose Anterior" name="dose_anterior" placeholder="Coronavirus"></app-dropdown-field>
+        <app-date-field [formGroup]="formGroup" label="Data:" name="data" ></app-date-field>
       </div>
     </div>
 
     <div class="row">
       <div>
-        <app-dropdown-field label="Distribuidora de preferencia" name="distribuidora" placeholder="Pfizer"></app-dropdown-field>
-      </div>
-    </div>
-
-    <div class="row">
-      <div>
-        <app-date-field label="Data:" name="date" ></app-date-field>
-      </div>
-    </div>
-
-    <div class="row">
-      <div>
-        <app-primary-btn label="AGENDAR"></app-primary-btn>
+        <app-primary-btn label="AGENDAR" [onClick]="submeter"></app-primary-btn>
       </div>
     </div>
   </form>
-</div>
+</form>

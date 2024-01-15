@@ -14,7 +14,7 @@ import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-compone
 export class AppointmentsComponent implements OnInit{
   constructor(public agendaService:AgendaService, private dialogService: DialogService){}
 
-  displayedColumns = ['Data', 'Vacina', 'Dose', 'Info']
+  displayedColumns = ['Data', 'Vacina', 'Situação', 'Dose', 'Info']
   nextAppointment : Agenda[] = []
   allAppointments : Agenda[] = []
   ref: DynamicDialogRef | undefined;

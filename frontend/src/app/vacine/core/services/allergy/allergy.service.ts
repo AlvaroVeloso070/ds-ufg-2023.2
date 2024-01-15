@@ -3,13 +3,14 @@ import Allergy from "../../entities/Allergy";
 import {BaseService} from '../base.service';
 import {BaseServiceProvider} from '../base-service.provider';
 import {map} from "rxjs";
+import {FormGroup, Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllergyService extends BaseService{
 
-  constructor(baseServiceProvider : BaseServiceProvider) {
+  constructor(private baseServiceProvider : BaseServiceProvider) {
     super(baseServiceProvider, "/alergia");
   }
 
@@ -21,5 +22,32 @@ export class AllergyService extends BaseService{
         });
       })
     )
+  }
+
+  getFormGroup() {
+    return this.baseServiceProvider.getFormBuilder().group({
+      nome: ['', Validators.required],
+    })
+  }
+
+  incluirAlergia(formGroup: FormGroup) {
+    if (formGroup.valid) {
+      this.post(formGroup.value).subscribe({
+        next: () => {
+          this.router.navigate(['vacine/home/allergy']);
+        },
+        error: (error) => {
+          this.messageService.add(
+            {
+              severity: 'error',
+              summary: 'Erro',
+              detail: error.error
+            }
+          );
+        }
+      })
+    }else {
+      this.baseServiceProvider.getMessageService().add({severity:'warn', summary: 'Atenção!', detail: 'Preencha todos os campos corretamente!'});
+    }
   }
 }

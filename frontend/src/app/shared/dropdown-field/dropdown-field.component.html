@@ -1,8 +1,7 @@
-<div class="dropdown-container">
+<div class="dropdown-container" [formGroup]="formGroup">
   <label [for]="id">{{label}}</label>
   <p-dropdown [options]="options"
-              [(ngModel)]="model"
-              (ngModelChange)="modelChange.emit($event)"
+              [formControlName]="name"
               [optionLabel]="optionLabel"
               [showClear]="showClear"
               [placeholder]="placeholder"

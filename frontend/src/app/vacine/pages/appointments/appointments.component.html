@@ -21,6 +21,7 @@
         <tr class="tableRow">
           <td class="firstCell">{{appointment.data | date:'short' }}</td>
           <td>{{appointment.vacina.titulo}}</td>
+          <td>{{appointment.situacao}}</td>
           <td>{{appointment.vacina.doses}}</td>
           <td>
             <a class="searchIcon" (click)="openInfoModal(appointment)">
@@ -49,9 +50,10 @@
 
       <ng-template pTemplate="body" let-appointment>
         <tr class="tableRow">
-          <td class="firstCell">{{appointment.data | date:'short' }}</td>
+          <td class="firstCell">{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
           <td>{{appointment.vacina.titulo}}</td>
-          <td>{{appointment.vacina.dose}}</td>
+          <td>{{appointment.situacao}}</td>
+          <td>{{appointment.vacina.doses}}</td>
           <td>
             <a class="searchIcon" (click)="openInfoModal(appointment)">
               <fa-icon [icon]="faSearch"></fa-icon>

@@ -4,36 +4,43 @@ export const navBarItems = [
   {
     label: 'Agendamentos',
     icon: faCalendarDays,
-    route: 'appointments'
+    route: 'appointments',
+    onlyAdmin: false
   },
   {
     label: 'Novo Agendamento',
     icon: faPlus,
-    route: 'appointment/new'
+    route: 'appointment/new',
+    onlyAdmin: false
   },
   {
     label: 'Vacinas',
     icon: faSyringe,
-    route: 'vaccine'
+    route: 'vaccine',
+    onlyAdmin: false
   },
   {
     label: 'Nova Vacina',
     icon: faPlus,
-    route: 'vaccine/new'
+    route: 'vaccine/new',
+    oldAdmin: true
   },
   {
     label: 'Alergias',
     icon: faSyringe,
-    route: 'allergy'
+    route: 'allergy',
+    onlyAdmin: false
   },
   {
     label: 'Nova Alergia',
     icon: faPlus,
-    route: 'allergy/new'
+    route: 'allergy/new',
+    onlyAdmin: true
   },
   {
     label: 'Perfil',
     icon: faUser,
-    route: 'profile'
+    route: 'profile',
+    onlyAdmin: false
   }
 ];

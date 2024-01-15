@@ -9,7 +9,7 @@ import {BaseFieldComponent} from "../base-field.component";
 export class PrimaryBtnComponent extends BaseFieldComponent{
 
   @Input()
-  onClick!: () => any;
+  onClick!: any;
 
   onClickHandler() : void{
     if (this.onClick){

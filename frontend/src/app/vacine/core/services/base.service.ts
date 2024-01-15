@@ -67,7 +67,7 @@ export abstract class BaseService{
           return data;
         }),
         catchError(error => {
-          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao cadastrar o registro.'});
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao cadastrar o registro. Codigo do erro: ' + error.status});
           return throwError(error);
         })
       );

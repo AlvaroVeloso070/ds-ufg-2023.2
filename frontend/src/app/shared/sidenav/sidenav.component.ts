@@ -4,6 +4,7 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 import {navBarItems} from "./navBarItems";
 import {LoginService} from "../../vacine/core/services/login/login.service";
 import {UserService} from "../../vacine/core/services/user/user.service";
+import User from "../../vacine/core/entities/user";
 
 @Component({
   selector: 'app-sidenav',
@@ -38,16 +39,22 @@ import {UserService} from "../../vacine/core/services/user/user.service";
 })
 export class SidenavComponent implements OnInit{
 
-  usuarioLogado!: any;
+  usuarioLogado!: User;
 
   constructor(private loginService: LoginService, private userService : UserService) {
   }
 
   ngOnInit(): void {
     this.userService.getUsuarioLogado().subscribe((usuario) => {
-      console.log('usuario', usuario)
       this.usuarioLogado = usuario;
     });
+  }
+
+  podeVerMenu(item: any) {
+    if (item.onlyAdmin) {
+      return this.usuarioLogado.isAdmin;
+    }
+    return true;
   }
 
   sideNavItems = navBarItems;

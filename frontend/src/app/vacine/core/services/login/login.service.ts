@@ -24,7 +24,6 @@ export class LoginService extends BaseService{
         this.router.navigate(['/vacine/home/appointments']);
       },
       error: error => {
-        console.log(error)
         this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao realizar o login: ' + error.error});
       }
     });

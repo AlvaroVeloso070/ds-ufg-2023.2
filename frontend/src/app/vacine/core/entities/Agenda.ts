@@ -13,6 +13,5 @@ export default class Agenda {
     this.situacao = situacao
     this.vacina = vacina
     this.pacienteId = pacienteId
-
   }
 }

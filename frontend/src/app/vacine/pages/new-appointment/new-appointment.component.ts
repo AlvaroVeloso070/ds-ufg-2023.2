@@ -1,11 +1,34 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AgendaService} from "../../core/services/agenda/agenda.service";
+import {VacinaService} from "../../core/services/vaccine/vacina.service";
+import Vacina from "../../core/entities/vacina";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-new-appointment',
   templateUrl: './new-appointment.component.html',
   styleUrl: './new-appointment.component.sass'
 })
-export class NewAppointmentComponent {
+export class NewAppointmentComponent implements OnInit{
 
-  novaDose: boolean = true;
+  public vacinas : Vacina[] = []
+  public formGroup !: FormGroup;
+  constructor(private agendaService: AgendaService, private vacinaService : VacinaService) {
+
+  }
+
+  ngOnInit(): void {
+    this.formGroup = this.agendaService.getFormGroup()
+
+    this.formGroup.get('usuarioId')?.setValue(this.agendaService.getPacienteId())
+
+    this.vacinaService.getVacinas().subscribe((vacinas:Vacina[]) => {
+      this.vacinas = vacinas
+    });
+  }
+
+  submeter() {
+    this.formGroup.get('vacinaId')?.setValue(this.formGroup.get('vacina')?.value.id)
+    this.agendaService.incluirAgendamento(this.formGroup);
+  }
 }
