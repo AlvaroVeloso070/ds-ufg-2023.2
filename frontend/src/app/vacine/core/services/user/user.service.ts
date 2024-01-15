@@ -17,16 +17,15 @@ export class UserService extends BaseService{
 
   getFormGroup(): FormGroup {
     return new FormBuilder().group({
-      name: ['', [Validators.required, Validators.maxLength(255)]],
+      nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      password_confirmation: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
-      birth_date: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      rg: ['', [Validators.required]],
-      sexo: ['', [Validators.required]],
-      mother_name: ['', [Validators.required]]
+      dataNascimento: ['', Validators.required],
+      sexo: ['', Validators.required],
+      logradouro: ['', Validators.required],
+      numero: ['', Validators.required],
+      uf: ['', Validators.required],
+      setor: ['', Validators.required],
+      cidade: ['', Validators.required]
     });
   }
 
