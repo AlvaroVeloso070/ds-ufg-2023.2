@@ -4,6 +4,7 @@ import Agenda from "../../core/entities/agenda";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-component";
+import {UserService} from "../../core/services/user/user.service";
 
 @Component({
   selector: 'app-appointments',
@@ -12,21 +13,25 @@ import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-compone
   providers: [DialogService]
 })
 export class AppointmentsComponent implements OnInit{
-  constructor(public agendaService:AgendaService, private dialogService: DialogService){}
+  constructor(public agendaService:AgendaService, private dialogService: DialogService, private userService : UserService){}
 
+  private usuarioLogado : any
   displayedColumns = ['Data', 'Vacina', 'Situação', 'Dose', 'Info']
   nextAppointment : Agenda[] = []
   allAppointments : Agenda[] = []
   ref: DynamicDialogRef | undefined;
   yetToLoad : boolean = true
-  //TODO GET & BLOCKUI OVERLAY
 
   ngOnInit(): void {
-    this.nextAppointment.push(this.agendaService.getNextAppointment(1))
-    this.agendaService.getAllAppointments().subscribe((appointments:Agenda[]) => {
-      this.allAppointments = appointments
+    this.userService.getUsuarioLogado().subscribe((usuarioLogado) => {
+      this.usuarioLogado = usuarioLogado
     })
-    this.yetToLoad = false
+
+    this.nextAppointment.push(this.agendaService.getNextAppointment(1))
+    this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
+      this.allAppointments = appointments
+      this.yetToLoad = false
+    })
   }
 
   openInfoModal(appointment: Agenda){

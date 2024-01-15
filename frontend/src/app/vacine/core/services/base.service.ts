@@ -47,6 +47,19 @@ export abstract class BaseService{
       );
   }
 
+  getWithParams(params : any) : Observable<any>{
+    return this.http.get<any>(this.apiUrl + this.endpoint, {headers: this.headers, params: params})
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao consultar os registros.'});
+          return throwError(error); // Propaga o erro para quem chama
+        })
+      );
+  }
+
   protected getById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}${this.endpoint}/${id}`, {headers: this.headers})
       .pipe(

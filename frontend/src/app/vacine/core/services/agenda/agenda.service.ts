@@ -30,6 +30,21 @@ export class AgendaService extends BaseService{
     )
   }
 
+  getUserAppointments(id: number):Observable<Agenda[]>{
+    let params = {
+      usuarioId: id
+    }
+
+    return this.getWithParams(params).pipe(
+      map((response:any) => {
+        return response.map((agenda:any) => {
+          let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, agenda.vacina.doses, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
+          return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuario.id)
+        })
+      })
+    )
+  }
+
   getFormGroup() {
     return this.baseServiceProvider.getFormBuilder().group({
       data: ['', Validators.required],
