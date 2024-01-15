@@ -21,13 +21,14 @@ export class AllergiesComponent implements OnInit{
 
   ngOnInit() {
     this.listarAlergias();
-    this.yetToLoad = false
+    this.yetToLoad = true
   }
 
   listarAlergias() {
     this.service.getAlergias().subscribe(
       (allergies: Allergy[]) => {
         this.allergies = allergies
+        this.yetToLoad = false
       }
     )
   }
