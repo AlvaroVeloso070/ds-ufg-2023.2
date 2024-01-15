@@ -21,8 +21,8 @@ export class SignupComponent implements OnInit{
   protected readonly faLock = faLock;
 
   readonly generos = [
-    {label: 'Masculino', id: 'M'},
-    {label: 'Feminino', id: 'F'}
+    {label: 'Masculino', id: 'm'},
+    {label: 'Feminino', id: 'f'}
   ]
 
   submeter() {

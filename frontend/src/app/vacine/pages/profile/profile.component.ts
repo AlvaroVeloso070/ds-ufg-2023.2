@@ -43,10 +43,6 @@ export class ProfileComponent implements OnInit{
       uf: this.user.uf
     })
 
-    console.log('user', this.user)
-    console.log('form', this.formGroup)
-    console.log('genders', this.genders)
-
     this.loadedUser = true
   }
 }
