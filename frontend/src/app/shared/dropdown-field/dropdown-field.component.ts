@@ -10,4 +10,5 @@ export class DropdownFieldComponent extends BaseFieldComponent{
   @Input()options: any[] = [];
   @Input()optionLabel: string = '';
   @Input()showClear: boolean = true;
+  @Input()optionValue: string = '';
 }

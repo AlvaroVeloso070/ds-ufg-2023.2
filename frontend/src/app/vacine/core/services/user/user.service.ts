@@ -60,4 +60,24 @@ export class UserService extends BaseService{
       new Gender('f', 'Feminino')
     ];
   }
+
+  incluirUsuario(formGroup: FormGroup, proximaRota: string) {
+    if (formGroup.valid) {
+      this.post(formGroup.value).subscribe({
+        next: () => {
+          this.router.navigate([proximaRota]);
+        },
+        error: (error) => {
+          this.messageService.add(
+            {
+              severity: 'error',
+              summary: 'Erro',
+              detail: error.error
+            }
+          );
+        }
+      })
+    }
+
+  }
 }

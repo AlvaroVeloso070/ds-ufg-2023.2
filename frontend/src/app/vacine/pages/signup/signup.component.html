@@ -1,5 +1,69 @@
 <div class="container">
-  <div class="row">
-    <h2 style="color: #fff">CADASTRO</h2>
+  <div class="login-container">
+    <app-logo [justIcon]="false"></app-logo>
+
+    <form [formGroup]="formGroup" class="login-form">
+      <div class="row">
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="nome" label="Nome:"></app-text-field>
+        </div>
+
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="email" label="Email:"></app-text-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-date-field [formGroup]="formGroup" name="dataNascimento" label="Data de nascimento:"></app-date-field>
+        </div>
+
+        <div class="col-6">
+          <app-dropdown-field [formGroup]="formGroup" name="sexo" label="Sexo:" [options]="generos" optionLabel="label" optionValue="id"></app-dropdown-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-password-field [formGroup]="formGroup" name="senha" label="Senha:"></app-password-field>
+        </div>
+
+        <div class="col-6">
+          <app-password-field [formGroup]="formGroup" name="senhaConfirmacao" label="Confirme sua senha:" ></app-password-field>
+        </div>
+      </div>
+
+      <div class="title">
+        <h2>Endereço</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <app-text-field [formGroup]="formGroup" name="logradouro" label="Logradouro:"></app-text-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="numero" label="Número:"></app-text-field>
+        </div>
+
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="setor" label="Setor:"></app-text-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="cidade" label="Cidade:"></app-text-field>
+        </div>
+
+        <div class="col-6">
+          <app-text-field [formGroup]="formGroup" name="uf" label="Estado:"></app-text-field>
+        </div>
+      </div>
+
+      <app-primary-btn label="CADASTRAR" (click)="submeter()"></app-primary-btn>
+    </form>
   </div>
 </div>
