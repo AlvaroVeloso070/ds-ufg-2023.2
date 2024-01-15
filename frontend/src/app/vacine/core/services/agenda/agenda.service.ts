@@ -63,11 +63,14 @@ export class AgendaService extends BaseService{
 
   incluirAgendamento(formGroup: FormGroup) {
     if (formGroup.valid) {
+      this.overlayService.updateOverlayState(true)
       this.post(formGroup.value).subscribe({
         next: () => {
           this.baseServiceProvider.getRouter().navigate(['vacine/home/appointments']);
+          this.overlayService.updateOverlayState(false)
         },
         error: (error) => {
+          this.overlayService.updateOverlayState(false)
           this.baseServiceProvider.getMessageService().add(
             {
               severity: 'error',

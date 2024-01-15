@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import Vacina from "../../core/entities/vacina";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
+import {OverlayService} from "../../core/services/overlay/overlay.service";
 
 @Component({
   selector: 'app-vaccines',
@@ -14,9 +15,8 @@ export class VaccinesComponent implements OnInit {
   vaccines: Vacina[] = [];
 
   ref: DynamicDialogRef | undefined;
-  yetToLoad : boolean = true
 
-  constructor(public service: VacinaService, public dialogService: DialogService) {
+  constructor(public service: VacinaService, public dialogService: DialogService, public overlayService:OverlayService) {
   }
 
   ngOnInit(): void {
@@ -24,17 +24,17 @@ export class VaccinesComponent implements OnInit {
   }
 
   protected readonly faEdit = faEdit;
-  protected readonly faTrash = faTrash;
 
   openEditModal(vaccine: Vacina) {
     console.log('vaccine', vaccine);
   }
 
   listarVacinas(){
+    this.overlayService.updateOverlayState(true)
     this.service.getVacinas().subscribe(
       (vaccines: Vacina[]) => {
         this.vaccines = vaccines;
-        this.yetToLoad = false;
+        this.overlayService.updateOverlayState(false)
       }
     );
   }

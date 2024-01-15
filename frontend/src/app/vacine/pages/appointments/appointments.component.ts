@@ -5,6 +5,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-component";
 import {UserService} from "../../core/services/user/user.service";
+import {OverlayService} from "../../core/services/overlay/overlay.service";
 
 @Component({
   selector: 'app-appointments',
@@ -13,22 +14,22 @@ import {UserService} from "../../core/services/user/user.service";
   providers: [DialogService]
 })
 export class AppointmentsComponent implements OnInit{
-  constructor(public agendaService:AgendaService, private dialogService: DialogService, private userService : UserService){}
+  constructor(public agendaService:AgendaService, private dialogService: DialogService, private userService : UserService, private overlayService:OverlayService){}
 
   private usuarioLogado : any
   displayedColumns = ['Data', 'Vacina', 'Situação', 'Dose', 'Info']
   nextAppointment : Agenda[] = []
   allAppointments : Agenda[] = []
   ref: DynamicDialogRef | undefined;
-  yetToLoad : boolean = true
 
   ngOnInit(): void {
+    this.overlayService.updateOverlayState(true)
     this.userService.getUsuarioLogado().subscribe((usuarioLogado) => {
       this.usuarioLogado = usuarioLogado
       this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
         this.allAppointments = this.agendaService.getPastAppointments(appointments)
         this.nextAppointment.push(this.agendaService.getNextAppointment(appointments));
-        this.yetToLoad = false
+        this.overlayService.updateOverlayState(false)
       })
     })
   }

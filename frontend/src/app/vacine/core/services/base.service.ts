@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import {Config} from "../config/config";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {catchError, map, Observable, throwError} from "rxjs";
+import {OverlayService} from "./overlay/overlay.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export abstract class BaseService{
   protected authService: AuthService;
   protected confirmationService : ConfirmationService;
   protected messageService : MessageService;
+  protected overlayService : OverlayService
 
   protected endpoint : string | null = null
 
@@ -32,6 +34,7 @@ export abstract class BaseService{
     this.confirmationService = baseServiceProvider.getConfirmationService();
     this.messageService = baseServiceProvider.getMessageService();
     this.endpoint = endpoint;
+    this.overlayService = baseServiceProvider.getOverlayService()
   }
 
   get(): Observable<any> {

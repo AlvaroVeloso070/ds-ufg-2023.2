@@ -62,11 +62,14 @@ export class UserService extends BaseService{
 
   incluirUsuario(formGroup: FormGroup, proximaRota: string) {
     if (formGroup.valid) {
+      this.overlayService.updateOverlayState(true)
       this.post(formGroup.value).subscribe({
         next: () => {
           this.router.navigate([proximaRota]);
+          this.overlayService.updateOverlayState(false)
         },
         error: (error) => {
+          this.overlayService.updateOverlayState(false)
           this.messageService.add(
             {
               severity: 'error',

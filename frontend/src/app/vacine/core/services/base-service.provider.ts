@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "./login/auth.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {FormBuilder} from "@angular/forms";
+import {OverlayService} from "./overlay/overlay.service";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,8 @@ export class BaseServiceProvider{
     private authService: AuthService,
     private confirmationService: ConfirmationService,
     private messageService : MessageService,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    private overlayService : OverlayService
   ) {
   }
 
@@ -41,5 +43,9 @@ export class BaseServiceProvider{
 
   public getFormBuilder() {
     return this.formBuilder;
+  }
+
+  public getOverlayService(){
+    return this.overlayService
   }
 }

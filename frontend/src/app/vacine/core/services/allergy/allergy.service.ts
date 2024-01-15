@@ -32,11 +32,14 @@ export class AllergyService extends BaseService{
 
   incluirAlergia(formGroup: FormGroup) {
     if (formGroup.valid) {
+      this.overlayService.updateOverlayState(true)
       this.post(formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['vacine/home/allergy']);
+          this.overlayService.updateOverlayState(false)
         },
         error: (error) => {
+          this.overlayService.updateOverlayState(false)
           this.messageService.add(
             {
               severity: 'error',

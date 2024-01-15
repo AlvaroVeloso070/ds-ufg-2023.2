@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import Allergy from "../../core/entities/Allergy";
 import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {OverlayService} from "../../core/services/overlay/overlay.service";
 
 @Component({
   selector: 'app-allergies',
@@ -13,21 +14,20 @@ export class AllergiesComponent implements OnInit{
   allergies: Allergy[] = []
 
   ref: DynamicDialogRef | undefined
-  yetToLoad: boolean = true
 
-  constructor(public service:AllergyService, public dialogService:DialogService) {
+  constructor(public service:AllergyService, public dialogService:DialogService, public overlayService:OverlayService) {
   }
 
   ngOnInit() {
+    this.overlayService.updateOverlayState(true)
     this.listarAlergias();
-    this.yetToLoad = true
   }
 
   listarAlergias() {
     this.service.getAlergias().subscribe(
       (allergies: Allergy[]) => {
         this.allergies = allergies
-        this.yetToLoad = false
+        this.overlayService.updateOverlayState(false)
       }
     )
   }

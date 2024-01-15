@@ -36,11 +36,14 @@ export class VacinaService extends BaseService {
 
   incluirVacina(formGroup: FormGroup) {
     if (formGroup.valid) {
+      this.overlayService.updateOverlayState(true)
       this.post(formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['vacine/home/vaccine']);
+          this.overlayService.updateOverlayState(false)
         },
         error: (error) => {
+          this.overlayService.updateOverlayState(false)
           this.messageService.add(
             {
               severity: 'error',
