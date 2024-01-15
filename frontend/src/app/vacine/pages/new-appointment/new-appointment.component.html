@@ -6,7 +6,7 @@
   <form>
     <div class="row">
       <div>
-        <app-dropdown-field [formGroup]="formGroup" label="Qual vacina?" name="vacina" [options]="vacinas" optionLabel="titulo"></app-dropdown-field>
+        <app-dropdown-field [formGroup]="formGroup" label="Qual vacina?" name="vacinaId" [options]="vacinas" optionLabel="titulo" optionValue="id"></app-dropdown-field>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="row">
       <div>
-        <app-primary-btn label="AGENDAR" [onClick]="submeter"></app-primary-btn>
+        <app-primary-btn label="AGENDAR" (click)="submeter()"></app-primary-btn>
       </div>
     </div>
   </form>

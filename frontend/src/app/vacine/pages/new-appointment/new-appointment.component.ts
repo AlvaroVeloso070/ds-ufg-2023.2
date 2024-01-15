@@ -28,7 +28,6 @@ export class NewAppointmentComponent implements OnInit{
   }
 
   submeter() {
-    this.formGroup.get('vacinaId')?.setValue(this.formGroup.get('vacina')?.value.id)
     this.agendaService.incluirAgendamento(this.formGroup);
   }
 }

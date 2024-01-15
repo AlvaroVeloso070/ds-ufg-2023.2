@@ -33,7 +33,6 @@ export class AgendaService extends BaseService{
   getFormGroup() {
     return this.baseServiceProvider.getFormBuilder().group({
       data: ['', Validators.required],
-      vacina: ['', Validators.required],
       vacinaId: ['', Validators.required],
       usuarioId: ['', Validators.required]
     })
@@ -43,7 +42,7 @@ export class AgendaService extends BaseService{
     if (formGroup.valid) {
       this.post(formGroup.value).subscribe({
         next: () => {
-          this.baseServiceProvider.getRouter().navigate(['/appointment']);
+          this.baseServiceProvider.getRouter().navigate(['vacine/home/appointments']);
         },
         error: (error) => {
           this.baseServiceProvider.getMessageService().add(
