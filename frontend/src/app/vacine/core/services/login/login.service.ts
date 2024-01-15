@@ -15,15 +15,18 @@ export class LoginService extends BaseService{
   }
 
   doLogin(login: Login) {
+    this.overlayService.updateOverlayState(true)
     this.http.post(this.apiUrl + this.endpoint, login).subscribe({
       next: data => {
         this.authService.autenticarSessao(data);
         this.userService.getUsuarioLogado().subscribe((usuario) => {
           this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Login realizado com sucesso. Bem vindo(a), ' + usuario.nome + '!'});
         });
+        this.overlayService.updateOverlayState(false)
         this.router.navigate(['/vacine/home/appointments']);
       },
       error: error => {
+        this.overlayService.updateOverlayState(false)
         this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao realizar o login: ' + error.error});
       }
     });
