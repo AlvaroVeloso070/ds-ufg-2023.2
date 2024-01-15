@@ -23,7 +23,7 @@ export const navBarItems = [
     label: 'Nova Vacina',
     icon: faPlus,
     route: 'vaccine/new',
-    oldAdmin: true
+    onlyAdmin: true
   },
   {
     label: 'Alergias',
