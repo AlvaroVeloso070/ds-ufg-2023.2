@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AgendaService} from "../../core/services/agenda/agenda.service";
 import Agenda from "../../core/entities/Agenda";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-component";
 import {UserService} from "../../core/services/user/user.service";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
+import {FutureAppointmentsComponent} from "../../dialogs/future-appointments/future-appointments.component";
 
 @Component({
   selector: 'app-appointments',
@@ -17,8 +16,9 @@ export class AppointmentsComponent implements OnInit{
   constructor(public agendaService:AgendaService, private dialogService: DialogService, private userService : UserService, private overlayService:OverlayService){}
 
   private usuarioLogado : any
-  displayedColumns = ['Data', 'Vacina', 'Situação', 'Dose', 'Info']
+  displayedColumns = ['Data', 'Vacina', 'Situação', 'Dose']
   nextAppointment : Agenda[] = []
+  futureAppointments : Agenda[] = []
   allAppointments : Agenda[] = []
   ref: DynamicDialogRef | undefined;
 
@@ -27,31 +27,33 @@ export class AppointmentsComponent implements OnInit{
     this.userService.getUsuarioLogado().subscribe((usuarioLogado) => {
       this.usuarioLogado = usuarioLogado
       this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
+        console.log('app', appointments)
         this.allAppointments = this.agendaService.getPastAppointments(appointments)
-        this.nextAppointment.push(this.agendaService.getNextAppointment(appointments));
+
+        this.futureAppointments = this.agendaService.getNextAppointment(appointments)
+        this.nextAppointment.push(this.futureAppointments[0]);
+
         this.overlayService.updateOverlayState(false)
       })
     })
   }
 
-  openInfoModal(appointment: Agenda){
-      this.ref = this.dialogService.open(AgendaInfoComponent, {
-        header: 'Informações',
-        width: '25%',
+  verCompromissosFuturos(){
+      this.ref = this.dialogService.open(FutureAppointmentsComponent, {
+        header: 'Compromissos Futuros',
+        width: '45%',
         contentStyle: {"max-height": "500px", "overflow": "auto"},
         baseZIndex: 10000,
-        styleClass: 'agenda-info-modal',
+        styleClass: 'future-appointments-component',
         maximizable: false,
         dismissableMask: true,
         data: {
-          agenda: appointment
+          futureAppointments: this.futureAppointments
         }
       });
+
+
   }
 
-  verHistoricoCompleto(){
-    alert('carregando historico completo')
-  }
 
-  protected readonly faSearch = faSearch;
 }

@@ -17,7 +17,6 @@ import {NewAppointmentComponent} from './pages/new-appointment/new-appointment.c
 import {HomeComponent} from './pages/home/home.component';
 import {TableModule} from "primeng/table";
 import {SignupComponent} from './pages/signup/signup.component';
-import {AgendaInfoComponent} from "./dialogs/agenda-info/agenda-info-component";
 import {VaccinesComponent} from './pages/vaccines/vaccines.component';
 import {NewVaccineComponent} from './pages/new-vaccine/new-vaccine.component';
 import {AllergiesComponent} from './pages/allergies/allergies.component';
@@ -29,6 +28,7 @@ import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
 import {BlockUIModule} from "primeng/blockui";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { FutureAppointmentsComponent } from './dialogs/future-appointments/future-appointments.component';
 
 
 @NgModule({
@@ -41,12 +41,12 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     AppointmentsComponent,
     NewAppointmentComponent,
     HomeComponent,
-    AgendaInfoComponent,
     SignupComponent,
     VaccinesComponent,
     NewVaccineComponent,
     AllergiesComponent,
     NewAllergyComponent,
+    FutureAppointmentsComponent,
   ],
   imports: [
     CommonModule,

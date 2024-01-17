@@ -26,7 +26,7 @@ export class AgendaService extends BaseService{
       return dataA.getTime() - dataB.getTime()
     })
 
-    return appointments[0]
+    return appointments
   }
 
   getPastAppointments(appointments : Agenda[]):Agenda[]{
