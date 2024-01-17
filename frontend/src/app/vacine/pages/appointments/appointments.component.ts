@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit{
     this.userService.getUsuarioLogado().subscribe((usuarioLogado) => {
       this.usuarioLogado = usuarioLogado
       this.agendaService.getUserAppointments(this.usuarioLogado.id).subscribe((appointments:Agenda[]) => {
-        console.log('app', appointments)
         this.allAppointments = this.agendaService.getPastAppointments(appointments)
 
         this.futureAppointments = this.agendaService.getNextAppointment(appointments)
