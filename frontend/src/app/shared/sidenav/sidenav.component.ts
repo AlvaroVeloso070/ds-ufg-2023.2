@@ -4,12 +4,12 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 import {navBarItems} from "./navBarItems";
 import {LoginService} from "../../vacine/core/services/login/login.service";
 import {UserService} from "../../vacine/core/services/user/user.service";
-import User from "../../vacine/core/entities/user";
+import User from "../../vacine/core/entities/User";
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.sass',
+  styleUrls: ['./sidenav.component.sass'],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [

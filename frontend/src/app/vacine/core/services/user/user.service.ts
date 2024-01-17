@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import User from "../../entities/user";
+import User from "../../entities/User";
 import Gender from "../../entities/gender";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";

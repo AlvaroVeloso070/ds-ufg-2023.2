@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
-import Vacina from "../../core/entities/vacina";
+import Vacina from "../../core/entities/Vacina";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
 import {OverlayService} from "../../core/services/overlay/overlay.service";

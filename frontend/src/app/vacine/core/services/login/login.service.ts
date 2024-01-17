@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import Login from "../../entities/login";
+import Login from "../../entities/Login";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
