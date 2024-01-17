@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AgendaService} from "../../core/services/agenda/agenda.service";
-import Agenda from "../../core/entities/agenda";
+import Agenda from "../../core/entities/Agenda";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AgendaInfoComponent} from "../../dialogs/agenda-info/agenda-info-component";

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../core/services/user/user.service";
-import User from "../../core/entities/user";
+import User from "../../core/entities/User";
 import Gender from "../../core/entities/gender";
 import {FormGroup} from "@angular/forms";
 

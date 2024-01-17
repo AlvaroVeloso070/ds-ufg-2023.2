@@ -1,4 +1,4 @@
-import Agenda from "./agenda";
+import Agenda from "./Agenda";
 import Allergy from "./Allergy";
 
 export default class User {

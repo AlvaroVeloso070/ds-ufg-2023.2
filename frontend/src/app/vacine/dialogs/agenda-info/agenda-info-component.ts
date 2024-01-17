@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
-import Agenda from "../../core/entities/agenda";
+import Agenda from "../../core/entities/Agenda";
 
 @Component({
   selector: 'app-agenda-info',
