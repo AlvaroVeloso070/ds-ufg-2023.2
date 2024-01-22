@@ -29,10 +29,6 @@
           <td>{{vaccine.intervalo + ' ' + vaccine.periodicidade}}</td>
           <td>
             <div class="iconsCell">
-              <a class="icons" (click)="openEditModal(vaccine)">
-                <fa-icon [icon]="faEdit"></fa-icon>
-              </a>
-
               <app-delete-btn [id]="vaccine.id" [service]="service" [funcaoListar]="listarVacinas"></app-delete-btn>
             </div>
           </td>
