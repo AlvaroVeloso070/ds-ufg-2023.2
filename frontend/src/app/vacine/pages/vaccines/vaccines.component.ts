@@ -25,9 +25,6 @@ export class VaccinesComponent implements OnInit {
 
   protected readonly faEdit = faEdit;
 
-  openEditModal(vaccine: Vacina) {
-    console.log('vaccine', vaccine);
-  }
 
   listarVacinas(){
     this.overlayService.updateOverlayState(true)

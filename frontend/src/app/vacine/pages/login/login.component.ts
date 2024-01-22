@@ -27,10 +27,6 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  esqueciMinhaSenha(){
-    this.router.navigate(['/vacine/forgot-password']);
-  }
-
   createAccount() {
     this.router.navigate(['/vacine/signup']);
   }

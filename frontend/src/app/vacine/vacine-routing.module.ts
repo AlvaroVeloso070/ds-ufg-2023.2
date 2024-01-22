@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {VacineComponent} from './vacine.component';
 import {LoginComponent} from "./pages/login/login.component";
-import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {AppointmentsComponent} from "./pages/appointments/appointments.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
@@ -16,7 +15,6 @@ import {authGuard} from "./auth.guard";
 
 const routes: Routes = [{ path: '', component: VacineComponent, children: [
   {path: 'login', component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'home', component: HomeComponent, canActivate: [authGuard],
     children:[
