@@ -36,8 +36,7 @@ export class SignupService extends BaseService{
       return;
     }
 
-    //remove e patch para bater com o model do back
-    formGroup.removeControl('senhaConfirmacao')
+    //patch para bater com o model do back
     formGroup.patchValue({
       dataNascimento: formatDate(formGroup.controls['dataNascimento'].value, 'yyyy-MM-dd', 'en')
     })
