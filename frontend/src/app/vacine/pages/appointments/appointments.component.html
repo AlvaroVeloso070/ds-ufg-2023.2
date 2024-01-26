@@ -1,60 +1,105 @@
 <div class="container">
-  <div class="nextAppoitmentTable">
-    <p-table [value]="nextAppointment" [tableStyle]="{'min-width': '80rem'}"  styleClass="p-datatable-gridlines">
-      <ng-template pTemplate="caption">
-        <div class="captionHeader">
-          Seu Próximo Compromisso:
-          <a class="linkHistorico" (click)="verCompromissosFuturos()">Ver Compromissos Futuros</a>
-        </div>
-      </ng-template>
+  <div *ngIf="usuarioAdmin">
+    <div class="allAppointmentsTable">
+      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}">
+        <ng-template pTemplate="caption">
+          <div class="captionHeader">
+            Agendamentos:
 
-      <ng-template pTemplate="header">
-        <tr class="tableRow">
-          <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
-        </tr>
-      </ng-template>
+            <div class="searchBar">
+              <p-dropdown [options]="usuariosAdmin" [(ngModel)]="userFilter" optionLabel="nome" placeholder="Filtrar Paciente" [showClear]="true"></p-dropdown>
+              <p-button class="button" label="Buscar" (click)="buscarAgendamentos()"></p-button>
+            </div>
 
-      <ng-template pTemplate="body" let-appointment>
-        <tr class="tableRow">
-          <td class="firstCell">{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
-          <td>{{appointment.vacina.titulo}}</td>
-          <td [ngSwitch]="appointment.situacao">
-            <span *ngSwitchCase="0">Agendado</span>
-            <span *ngSwitchCase="1">Realizado</span>
-            <span *ngSwitchCase="2">Cancelado</span>
-          </td>
-          <td>{{appointment.vacina.doses}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr class="tableRow">
+            <th *ngFor="let coluna of displayedColumnsAdmin">{{ coluna }}</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-appointment>
+          <tr class="tableRow">
+            <td class="firstCell">{{appointment.paciente.nome}}</td>
+            <td >{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
+            <td>{{appointment.vacina.titulo}}</td>
+            <td [ngSwitch]="appointment.situacao">
+              <span *ngSwitchCase="0">Agendado</span>
+              <span *ngSwitchCase="1">Realizado</span>
+              <span *ngSwitchCase="2">Cancelado</span>
+            </td>
+            <td>{{appointment.vacina.doses}}</td>
+            <td class="cellData">
+              <a class="editIcon" (click)="openBaixaModalAdmin(appointment)">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </div>
 
-  <div class="allAppointmentsTable">
-    <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}">
-      <ng-template pTemplate="caption">
-        <div class="captionHeader">
-          Histórico:
-        </div>
-      </ng-template>
+  <div *ngIf="!usuarioAdmin">
+    <div class="nextAppoitmentTable">
+      <p-table [value]="nextAppointment" [tableStyle]="{'min-width': '80rem'}"  styleClass="p-datatable-gridlines">
+        <ng-template pTemplate="caption">
+          <div class="captionHeader">
+            Seu Próximo Compromisso:
+            <a class="linkHistorico" (click)="verCompromissosFuturos()">Ver Compromissos Futuros</a>
+          </div>
+        </ng-template>
 
-      <ng-template pTemplate="header">
-        <tr class="tableRow">
-          <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
-        </tr>
-      </ng-template>
+        <ng-template pTemplate="header">
+          <tr class="tableRow">
+            <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
+          </tr>
+        </ng-template>
 
-      <ng-template pTemplate="body" let-appointment>
-        <tr class="tableRow">
-          <td class="firstCell">{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
-          <td>{{appointment.vacina.titulo}}</td>
-          <td [ngSwitch]="appointment.situacao">
-            <span *ngSwitchCase="0">Agendado</span>
-            <span *ngSwitchCase="1">Realizado</span>
-            <span *ngSwitchCase="2">Cancelado</span>
-          </td>
-          <td>{{appointment.vacina.doses}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+        <ng-template pTemplate="body" let-appointment>
+          <tr class="tableRow">
+            <td class="firstCell">{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
+            <td>{{appointment.vacina.titulo}}</td>
+            <td [ngSwitch]="appointment.situacao">
+              <span *ngSwitchCase="0">Agendado</span>
+              <span *ngSwitchCase="1">Realizado</span>
+              <span *ngSwitchCase="2">Cancelado</span>
+            </td>
+            <td>{{appointment.vacina.doses}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="allAppointmentsTable">
+      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}">
+        <ng-template pTemplate="caption">
+          <div class="captionHeader">
+            Histórico:
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr class="tableRow">
+            <th *ngFor="let coluna of displayedColumns">{{ coluna }}</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-appointment>
+          <tr class="tableRow">
+            <td class="firstCell">{{appointment.data | date:'dd/MM/yyyy hh:mm' }}</td>
+            <td>{{appointment.vacina.titulo}}</td>
+            <td [ngSwitch]="appointment.situacao">
+              <span *ngSwitchCase="0">Agendado</span>
+              <span *ngSwitchCase="1">Realizado</span>
+              <span *ngSwitchCase="2">Cancelado</span>
+            </td>
+            <td>{{appointment.vacina.doses}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </div>
 </div>

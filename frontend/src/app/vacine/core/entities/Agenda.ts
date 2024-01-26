@@ -6,12 +6,12 @@ export default class Agenda {
   situacao !: number
 
   vacina !: Vacina
-  pacienteId !: number
+  paciente !: any
 
-  constructor(data : Date, situacao : number, vacina : Vacina, pacienteId : number){
+  constructor(data : Date, situacao : number, vacina : Vacina, paciente : any){
     this.data = data
     this.situacao = situacao
     this.vacina = vacina
-    this.pacienteId = pacienteId
+    this.paciente = paciente
   }
 }

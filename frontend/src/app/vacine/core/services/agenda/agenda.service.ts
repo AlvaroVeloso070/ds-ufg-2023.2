@@ -5,6 +5,7 @@ import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
 import {map, Observable} from "rxjs";
 import {FormGroup, Validators} from "@angular/forms";
+import User from "../../entities/User";
 
 @Injectable({
   providedIn: 'root'
@@ -45,12 +46,63 @@ export class AgendaService extends BaseService{
 
     return this.getAppointmentsWithParams(params).pipe(
       map((response:any) => {
+        let i = 1
+        let dosesVacina = 0
         return response.map((agenda:any) => {
-          let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, agenda.vacina.doses, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
+          if(agenda.vacina.doses != dosesVacina) {
+            dosesVacina = agenda.vacina.doses
+            i = 1
+          }
+
+          if(i > dosesVacina) i = 1
+
+          let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, i, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
+
+          ++i
           return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuarioId)
         })
       })
     )
+  }
+
+  getAllAppointments(){
+    return this.get().pipe(
+      map((response:any) => {
+        let i = 1
+        let dosesVacina = 0
+        return response.map((agenda:any) => {
+          if(agenda.vacina.doses != dosesVacina) {
+            dosesVacina = agenda.vacina.doses
+            i = 1
+          }
+
+          if(i > dosesVacina) i = 1
+
+          let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, i, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
+          let usuario = agenda.usuario
+
+          ++i
+          return new Agenda(agenda.data,  agenda.situacao, vacina, usuario)
+        })
+      })
+    )
+  }
+
+  getUsersFromAppointments(appointments : Agenda[]){
+    let users : User[] = []
+    let userIds = new Set<number>()
+    appointments.forEach(app => {
+      if(!userIds.has(app.paciente.id)){
+        userIds.add(app.paciente.id)
+        users.push(app.paciente)
+      }
+    })
+
+    return users
+  }
+
+  putSituacao(){
+    //TODO
   }
 
   getFormGroup() {
@@ -88,4 +140,6 @@ export class AgendaService extends BaseService{
   getPacienteId() : number {
     return this.authService.getIdUsuarioLogado();
   }
+
+
 }

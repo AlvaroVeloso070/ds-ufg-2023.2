@@ -1,0 +1,15 @@
+<div>
+  <div class="container">
+    <p class="label">Situação Atual: </p>
+    <input style="width: 200px; margin-left: 20px" type="text" pInputText [disabled]="true" [(ngModel)]="situacaoAtual" />
+  </div>
+
+  <div class="container">
+    <p class="label">Nova Situação: </p>
+    <p-dropdown class="dropdown" [options]="situacoes" [(ngModel)]="novaSituacao" optionLabel="nome" [showClear]="true" placeholder="Nova Situação..."></p-dropdown>
+  </div>
+
+  <p-button class="button" label="Atualizar" (click)="atualizarSituacao()"></p-button>
+</div>
+
+

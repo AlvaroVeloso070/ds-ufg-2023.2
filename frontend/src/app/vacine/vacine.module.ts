@@ -25,6 +25,9 @@ import {BlockUIModule} from "primeng/blockui";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import { FutureAppointmentsComponent } from './dialogs/future-appointments/future-appointments.component';
+import {InputTextModule} from "primeng/inputtext";
+import {DropdownModule} from "primeng/dropdown";
+import { BaixaVacinaComponent } from './dialogs/baixa-vacina/baixa-vacina.component';
 
 
 @NgModule({
@@ -41,6 +44,7 @@ import { FutureAppointmentsComponent } from './dialogs/future-appointments/futur
     AllergiesComponent,
     NewAllergyComponent,
     FutureAppointmentsComponent,
+    BaixaVacinaComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { FutureAppointmentsComponent } from './dialogs/future-appointments/futur
     HttpClientModule,
     BlockUIModule,
     ProgressSpinnerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextModule,
+    DropdownModule
   ],
   providers: [
     AuthService,
