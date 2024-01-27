@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import Agenda from "../../core/entities/Agenda";
 import {AgendaService} from "../../core/services/agenda/agenda.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-baixa-vacina',
@@ -15,18 +16,20 @@ export class BaixaVacinaComponent {
   situacoes : any[]
 
   novaSituacao : any
-  descricao : string = ''
+  observacao : string = ''
 
-  constructor(private ref:DynamicDialogRef, private config:DynamicDialogConfig, private agendaService : AgendaService) {
+  constructor(private ref:DynamicDialogRef, private config:DynamicDialogConfig, private agendaService : AgendaService, private messageService: MessageService) {
     this.appointment = this.config.data.appointment
     this.loadSituacaoAtual()
     this.situacoes = this.loadSituacoes()
   }
 
   atualizarSituacao(){
-    console.log('nova situacao', this.novaSituacao)
+    if(this.novaSituacao == null) this.messageService.add({severity:'error', summary: 'Erro', detail: 'Escolha uma nova situação para o agendamento!'})
 
-    //TODO TEXTAREA DA DESCRIÇÃO E CHAMDA DO SERVICE
+    this.agendaService.updateSituacao(this.appointment.id, this.novaSituacao.nome, this.observacao).subscribe(() => {
+      this.ref.close(true)
+    })
   }
 
   loadSituacaoAtual(){

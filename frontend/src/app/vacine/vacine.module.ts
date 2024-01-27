@@ -28,6 +28,7 @@ import { FutureAppointmentsComponent } from './dialogs/future-appointments/futur
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import { BaixaVacinaComponent } from './dialogs/baixa-vacina/baixa-vacina.component';
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 
 @NgModule({
@@ -46,22 +47,23 @@ import { BaixaVacinaComponent } from './dialogs/baixa-vacina/baixa-vacina.compon
     FutureAppointmentsComponent,
     BaixaVacinaComponent,
   ],
-  imports: [
-    CommonModule,
-    VacineRoutingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FaIconComponent,
-    TableModule,
-    ButtonModule,
-    HttpClientModule,
-    BlockUIModule,
-    ProgressSpinnerModule,
-    ConfirmDialogModule,
-    InputTextModule,
-    DropdownModule
-  ],
+    imports: [
+        CommonModule,
+        VacineRoutingModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FaIconComponent,
+        TableModule,
+        ButtonModule,
+        HttpClientModule,
+        BlockUIModule,
+        ProgressSpinnerModule,
+        ConfirmDialogModule,
+        InputTextModule,
+        DropdownModule,
+        InputTextareaModule
+    ],
   providers: [
     AuthService,
     {

@@ -59,7 +59,7 @@ export class AgendaService extends BaseService{
           let vacina = new Vacina(agenda.vacina.id, agenda.vacina.titulo, i, agenda.vacina.periodicidade, agenda.vacina.intervalo, agenda.vacina.situacao)
 
           ++i
-          return new Agenda(agenda.data,  agenda.situacao, vacina, agenda.usuarioId)
+          return new Agenda(agenda.id, agenda.data,  agenda.situacao, vacina, agenda.usuarioId)
         })
       })
     )
@@ -70,6 +70,7 @@ export class AgendaService extends BaseService{
       map((response:any) => {
         let i = 1
         let dosesVacina = 0
+
         return response.map((agenda:any) => {
           if(agenda.vacina.doses != dosesVacina) {
             dosesVacina = agenda.vacina.doses
@@ -82,7 +83,7 @@ export class AgendaService extends BaseService{
           let usuario = agenda.usuario
 
           ++i
-          return new Agenda(agenda.data,  agenda.situacao, vacina, usuario)
+          return new Agenda(agenda.id, agenda.data,  agenda.situacao, vacina, usuario)
         })
       })
     )
@@ -101,8 +102,14 @@ export class AgendaService extends BaseService{
     return users
   }
 
-  putSituacao(){
-    //TODO
+  updateSituacao(id : number, situacao : string, observacao : string){
+    let params = {
+      "situacao": situacao,
+      "id":  id,
+      "observacoes": observacao
+    }
+
+    return this.putWithParamsAgenda(params)
   }
 
   getFormGroup() {

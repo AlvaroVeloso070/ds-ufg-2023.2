@@ -63,6 +63,23 @@ export abstract class BaseService{
       );
   }
 
+  putWithParamsAgenda(params: any): Observable<any> {
+    this.overlayService.updateOverlayState(true)
+    return this.http.put<any>(`${this.apiUrl}${this.endpoint}/situacao`, null, {headers: this.headers, params: params})
+      .pipe(
+        map(data => {
+          this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Registro atualizado com sucesso!'});
+          this.overlayService.updateOverlayState(false)
+          return data;
+        }),
+        catchError(error => {
+          this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro ao atualizar o registro.'});
+          this.overlayService.updateOverlayState(false)
+          return throwError(error);
+        })
+      );
+  }
+
   protected getById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}${this.endpoint}/${id}`, {headers: this.headers})
       .pipe(

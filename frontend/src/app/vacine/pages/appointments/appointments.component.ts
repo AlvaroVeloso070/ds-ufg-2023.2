@@ -80,7 +80,7 @@ export class AppointmentsComponent implements OnInit{
     this.ref = this.dialogService.open(BaixaVacinaComponent, {
       header: 'Situação do Agendamento',
       width: '500px',
-      height: '300px',
+      height: '400px',
       baseZIndex: 10000,
       styleClass: 'baixa-vacina-component',
       maximizable: false,
@@ -89,9 +89,17 @@ export class AppointmentsComponent implements OnInit{
         appointment: appointment
       }
     })
+
+    this.ref.onClose.subscribe((result : boolean) => {
+      if(result) this.getAppointments()
+    })
   }
 
   buscarAgendamentos(){
+    this.getAppointments()
+  }
+
+  getAppointments(){
     this.overlayService.updateOverlayState(true)
     if(this.userFilter != null){
       this.agendaService.getUserAppointments(this.userFilter.id).subscribe((appointments : Agenda[]) => {
