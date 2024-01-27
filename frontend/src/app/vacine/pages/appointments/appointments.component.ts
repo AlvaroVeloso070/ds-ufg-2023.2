@@ -91,15 +91,15 @@ export class AppointmentsComponent implements OnInit{
     })
 
     this.ref.onClose.subscribe((result : boolean) => {
-      if(result) this.getAppointments()
+      if(result) this.getAllAppointments()
     })
   }
 
   buscarAgendamentos(){
-    this.getAppointments()
+    this.getAllAppointments()
   }
 
-  getAppointments(){
+  getAllAppointments(){
     this.overlayService.updateOverlayState(true)
     if(this.userFilter != null){
       this.agendaService.getUserAppointments(this.userFilter.id).subscribe((appointments : Agenda[]) => {

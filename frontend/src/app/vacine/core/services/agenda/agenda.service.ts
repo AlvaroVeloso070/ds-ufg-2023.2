@@ -19,7 +19,7 @@ export class AgendaService extends BaseService{
   getNextAppointment(appointments : Agenda[]) : any{
     appointments = appointments.filter((item:any) => {
       let dataAp = new Date(item.data)
-      return dataAp >= new Date()
+      return dataAp >= new Date() && item.situacao != 2
     }).sort((agendaA, agendaB) => {
       let dataA = new Date(agendaA.data)
       let dataB = new Date(agendaB.data)
@@ -33,7 +33,7 @@ export class AgendaService extends BaseService{
   getPastAppointments(appointments : Agenda[]):Agenda[]{
     appointments = appointments.filter((item:any) => {
       let dataAp = new Date(item.data)
-      return dataAp <= new Date()
+      return dataAp <= new Date() || item.situacao == 2
     })
 
     return appointments
@@ -46,6 +46,7 @@ export class AgendaService extends BaseService{
 
     return this.getAppointmentsWithParams(params).pipe(
       map((response:any) => {
+        //ARRUMAR ESSA LOGICA DE LISTAGEM DAS DOSES
         let i = 1
         let dosesVacina = 0
         return response.map((agenda:any) => {
@@ -68,6 +69,7 @@ export class AgendaService extends BaseService{
   getAllAppointments(){
     return this.get().pipe(
       map((response:any) => {
+        //ESSA TB
         let i = 1
         let dosesVacina = 0
 
