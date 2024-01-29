@@ -4,6 +4,7 @@ import {BaseService} from '../base.service';
 import {BaseServiceProvider} from '../base-service.provider';
 import {map} from "rxjs";
 import {FormGroup, Validators} from "@angular/forms";
+import Vacina from "../../entities/vacina";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,8 @@ export class AllergyService extends BaseService{
   getFormGroup() {
     return this.baseServiceProvider.getFormBuilder().group({
       nome: ['', Validators.required],
+      vacina: [Vacina],
+      vacinaId: ['']
     })
   }
 

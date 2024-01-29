@@ -5,6 +5,7 @@ import Gender from "../../entities/gender";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
 import {catchError, from, map, Observable} from "rxjs";
+import Allergy from "../../entities/Allergy";
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,9 @@ export class UserService extends BaseService{
     } else {
       return from(this.getUser(this.authService.getIdUsuarioLogado())).pipe(
         map((usuario: User) => {
+          usuario.alergias = usuario.alergias.map((alergia: Allergy) => {
+            return new Allergy(alergia.id, alergia.nome, alergia.vacina);
+          })
           sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
           return usuario;
         }),

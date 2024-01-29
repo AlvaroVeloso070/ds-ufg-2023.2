@@ -12,6 +12,12 @@
 
     <div class="row">
       <div>
+        <app-dropdown-field [formGroup]="formGroup" [options]="vacinas" optionLabel="titulo" label="Vacina Relacionada:" name="vacina"></app-dropdown-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
         <app-primary-btn label="CADASTRAR" (click)="submeter()"></app-primary-btn>
       </div>
     </div>

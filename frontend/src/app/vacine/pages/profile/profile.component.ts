@@ -51,9 +51,7 @@ export class ProfileComponent implements OnInit{
       setor: this.user.setor,
       cidade: this.user.cidade,
       uf: this.user.uf,
-      alergias: this.user.alergias.map((alergia: Allergy) => {
-        return new Allergy(alergia.id, alergia.nome, alergia.vacina);
-      })
+      alergias: this.user.alergias
     })
 
     this.loadedUser = true
