@@ -4,7 +4,7 @@ import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
-import Vacina from "../../core/entities/vacina";
+import Vacina from "../../core/entities/Vacina";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DeleteModalComponent} from "../../dialogs/delete-modal/delete-modal.component";
 

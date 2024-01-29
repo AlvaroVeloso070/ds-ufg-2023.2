@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {AllergyService} from "../../core/services/allergy/allergy.service";
-import Vacina from "../../core/entities/vacina";
+import Vacina from "../../core/entities/Vacina";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
 
 @Component({
