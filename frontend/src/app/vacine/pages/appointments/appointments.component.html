@@ -1,7 +1,7 @@
 <div class="container">
   <div *ngIf="usuarioAdmin">
     <div class="allAppointmentsTable">
-      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}">
+      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}" [paginator]="true" [rows]="12">
         <ng-template pTemplate="caption">
           <div class="captionHeader">
             Agendamentos:
@@ -74,7 +74,7 @@
     </div>
 
     <div class="allAppointmentsTable">
-      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}">
+      <p-table [value]="allAppointments" [tableStyle]="{'min-width': '80rem'}" [paginator]="true" [rows]="8">
         <ng-template pTemplate="caption">
           <div class="captionHeader">
             Histórico:

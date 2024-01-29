@@ -4,7 +4,7 @@
   </div>
 
   <div class="allAppointmentsTable">
-    <p-table #table [value]="vaccines" [tableStyle]="{'min-width': '80rem'}">
+    <p-table #table [value]="vaccines" [tableStyle]="{'min-width': '80rem'}" [paginator]="true" [rows]="10">
       <ng-template pTemplate="caption">
         <div class="captionHeader">
           Vacinas:

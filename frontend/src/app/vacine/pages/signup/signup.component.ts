@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import Allergy from "../../core/entities/Allergy";
 import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit{
   constructor(private service : SignupService,
               private router : Router,
               private allergyService : AllergyService,
-              private overlayService : OverlayService) { }
+              private overlayService : OverlayService,
+              private messageService : MessageService) { }
   ngOnInit(): void {
     this.formGroup = this.service.getFormGroup();
     this.allergyService.getAlergias().subscribe(
@@ -40,7 +42,16 @@ export class SignupComponent implements OnInit{
   ]
 
   submeter() {
-    this.service.incluirUsuario(this.formGroup);
+    if(this.formGroup.valid){
+      this.service.incluirUsuario(this.formGroup);
+    }
+    else{
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Dados Inválidos',
+        detail: 'Preencha os dados corretamente.'
+      })
+    }
   }
 
   voltar(){
