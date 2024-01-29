@@ -131,7 +131,11 @@ export abstract class BaseService{
         }
       },
       error: error => {
-        this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao excluir o registro.'});
+        if (error.status == 403) {
+          this.messageService.add({severity:'warn', summary:'Erro!', detail:'Você não tem permissão para realizar esta ação.'});
+        }else{
+          this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao excluir o registro.'});
+        }
       }
     });
   }

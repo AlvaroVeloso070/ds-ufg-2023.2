@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import Agenda from "../../core/entities/Agenda";
 import {AgendaService} from "../../core/services/agenda/agenda.service";
@@ -25,7 +25,7 @@ export class BaixaVacinaComponent {
   }
 
   atualizarSituacao(){
-    if(this.novaSituacao == null) this.messageService.add({severity:'error', summary: 'Erro', detail: 'Escolha uma nova situação para o agendamento!'})
+    if(this.novaSituacao == null) this.messageService.add({severity:'warn', summary: 'Aviso!', detail: 'Escolha uma nova situação para o agendamento!'})
 
     this.agendaService.updateSituacao(this.appointment.id, this.novaSituacao.nome, this.observacao).subscribe(() => {
       this.ref.close(true)
