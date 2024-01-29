@@ -23,6 +23,8 @@ import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {NumberFieldComponent} from './number-field/number-field.component';
 import {InputNumberModule} from "primeng/inputnumber";
+import {MultiselectChipsComponent} from './multiselect-chips/multiselect-chips.component';
+import {MultiSelectModule} from "primeng/multiselect";
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import {InputNumberModule} from "primeng/inputnumber";
     CheckboxFieldComponent,
     DropdownFieldComponent,
     DeleteBtnComponent,
-    NumberFieldComponent
+    NumberFieldComponent,
+    MultiselectChipsComponent
   ],
   exports: [
     TextFieldComponent,
@@ -49,24 +52,26 @@ import {InputNumberModule} from "primeng/inputnumber";
     CheckboxFieldComponent,
     DropdownFieldComponent,
     DeleteBtnComponent,
-    NumberFieldComponent
+    NumberFieldComponent,
+    MultiselectChipsComponent
   ],
-  imports: [
-    CommonModule,
-    CalendarModule,
-    FormsModule,
-    PasswordModule,
-    RouterLinkActive,
-    FaIconComponent,
-    RouterLink,
-    InputMaskModule,
-    InputTextModule,
-    CheckboxModule,
-    DropdownModule,
-    ToastModule,
-    ConfirmDialogModule,
-    ReactiveFormsModule,
-    InputNumberModule
-  ]
+    imports: [
+        CommonModule,
+        CalendarModule,
+        FormsModule,
+        PasswordModule,
+        RouterLinkActive,
+        FaIconComponent,
+        RouterLink,
+        InputMaskModule,
+        InputTextModule,
+        CheckboxModule,
+        DropdownModule,
+        ToastModule,
+        ConfirmDialogModule,
+        ReactiveFormsModule,
+        InputNumberModule,
+        MultiSelectModule
+    ]
 })
 export class SharedModule { }

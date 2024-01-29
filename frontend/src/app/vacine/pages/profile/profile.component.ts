@@ -3,6 +3,8 @@ import {UserService} from "../../core/services/user/user.service";
 import User from "../../core/entities/User";
 import Gender from "../../core/entities/gender";
 import {FormGroup} from "@angular/forms";
+import Allergy from "../../core/entities/Allergy";
+import {AllergyService} from "../../core/services/allergy/allergy.service";
 
 @Component({
   selector: 'app-profile',
@@ -11,11 +13,13 @@ import {FormGroup} from "@angular/forms";
 })
 export class ProfileComponent implements OnInit{
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private alergiaService : AllergyService) { }
   formGroup !: FormGroup
   user !: User;
   genders: Gender[] = this.userService.getGenders();
   loadedUser : boolean = false
+  alergias : Allergy[] = [];
 
   ngOnInit(): void {
     this.formGroup = this.userService.getFormGroup()
@@ -25,6 +29,12 @@ export class ProfileComponent implements OnInit{
       this.user = usuarioLogado
       this.loadFormGroup()
     })
+
+    this.alergiaService.getAlergias().subscribe(
+      (allergies: Allergy[]) => {
+        this.alergias = allergies
+      }
+    )
   }
 
   loadFormGroup(){
@@ -40,7 +50,10 @@ export class ProfileComponent implements OnInit{
       numero: this.user.numero,
       setor: this.user.setor,
       cidade: this.user.cidade,
-      uf: this.user.uf
+      uf: this.user.uf,
+      alergias: this.user.alergias.map((alergia: Allergy) => {
+        return new Allergy(alergia.id, alergia.nome, alergia.vacina);
+      })
     })
 
     this.loadedUser = true

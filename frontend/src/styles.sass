@@ -14,7 +14,7 @@ body
   padding: 0 !important
   font-family: $font !important
 
-.col-sm-6, col-sm-12
+.col-sm-6, .col-sm-12
   padding: 0 15px !important
 
 .p-datatable .p-datatable-header
@@ -23,7 +23,7 @@ body
   border-radius: 5px 5px 0 0
 
 
-.p-inputtext, .p-dropdown
+.p-inputtext, .p-dropdown, .p-multiselect
   width: 100%
   background: $input-background-color
   box-sizing: border-box
@@ -33,13 +33,24 @@ body
   height: $input-height
   border-radius: 10px
 
-.p-dropdown-panel
+.p-multiselect.p-multiselect-chip .p-multiselect-token
+  background: $primary-color
+  color: $secondary-color
+  padding: 3px 5px
+  border-radius: 10px
+
+.p-dropdown-panel, .p-multiselect-panel
   border: none
 
-  .p-dropdown-items-wrapper
+  .p-multiselect-filter
+    background: $background-color
+
+  .p-dropdown-items-wrapper, .p-multiselect-header, .p-multiselect-items-wrapper
     background: $input-background-color
     color: $secondary-color
 
+    ul
+      padding-left: 0
     .p-highlight
       background: $primary-color
 
@@ -53,7 +64,7 @@ label
   color: $label-color
   font-size: 16px
 
-.p-password, .p-inputtext, .p-calendar, .p-dropdown
+.p-password, .p-inputtext, .p-calendar, .p-dropdown, .p-multiselect
   width: 100%
 
 p-calendar

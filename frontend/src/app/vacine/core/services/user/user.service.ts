@@ -25,7 +25,8 @@ export class UserService extends BaseService{
       numero: ['', Validators.required],
       uf: ['', Validators.required],
       setor: ['', Validators.required],
-      cidade: ['', Validators.required]
+      cidade: ['', Validators.required],
+      alergias: [[]],
     });
   }
 

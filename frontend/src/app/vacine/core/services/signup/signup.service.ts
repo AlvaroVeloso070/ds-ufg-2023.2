@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
-import {FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user/user.service";
 import {formatDate} from "@angular/common";
+import Allergy from "../../entities/Allergy";
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,17 @@ export class SignupService extends BaseService{
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required],
-      senhaConfirmacao: ['', [Validators.required, Validators.minLength(6)]],
-      dataNascimento: ['', Validators.required],
+      senhaConfirmacao: ['', [Validators.required]],
+      dataNascimento: [''],
+      dataNascimentoForm: ['', Validators.required],
       sexo: ['', Validators.required],
       logradouro: ['', Validators.required],
       numero: ['', Validators.required],
       uf: ['', Validators.required],
       setor: ['', Validators.required],
-      cidade: ['', Validators.required]
+      cidade: ['', Validators.required],
+      alergias: [[]],
+      alergiasForm: [[]]
     });
   }
 
@@ -36,11 +40,57 @@ export class SignupService extends BaseService{
       return;
     }
 
-    //patch para bater com o model do back
     formGroup.patchValue({
-      dataNascimento: formatDate(formGroup.controls['dataNascimento'].value, 'yyyy-MM-dd', 'en')
+      alergias: formGroup.get('alergiasForm')?.value.map((alergia: Allergy) => {
+        return alergia.id;
+      })
     })
 
+    formGroup.patchValue({
+      dataNascimento: formatDate(formGroup.controls['dataNascimentoForm'].value, 'yyyy-MM-dd', 'en')
+    })
+
+    if (formGroup.invalid) {
+      this.exibirMensagensDeAviso(formGroup);
+      return;
+    }
+
     this.userService.incluirUsuario(formGroup, 'vacine/home/appointments');
+  }
+
+  verificarCamposObrigatorios(formGroup: FormGroup): string[] {
+    const mensagens: string[] = [];
+
+    const verificarControles = (controles: { [key: string]: AbstractControl }) => {
+      for (const controlName in controles) {
+        const control: AbstractControl = controles[controlName];
+
+        if (control instanceof FormGroup) {
+          verificarControles((control as FormGroup).controls);
+        } else if (control.validator) {
+          if (control.hasError('required') && !control.value) {
+            mensagens.push(`O campo ${controlName} é obrigatório.`);
+          }
+        }
+      }
+    };
+
+    verificarControles(formGroup.controls);
+
+    return mensagens;
+  }
+
+  exibirMensagensDeAviso(formGroup: FormGroup) {
+    const mensagens = this.verificarCamposObrigatorios(formGroup);
+
+    if (mensagens.length > 0) {
+      mensagens.forEach(mensagem => {
+        this.baseServiceProvider.getMessageService().add({
+          severity: 'warn',
+          summary: 'Aviso!',
+          detail: mensagem
+        });
+      });
+    }
   }
 }

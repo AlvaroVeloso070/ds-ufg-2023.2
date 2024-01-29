@@ -11,57 +11,57 @@
   <form *ngIf="user">
     <div class="row">
       <div class="col col-sm-6">
-        <app-text-field id="name" [formGroup]="formGroup" label="Nome:" name="nome"></app-text-field>
+        <app-text-field id="name" [formGroup]="formGroup" label="Nome:" name="nome" [readonly]="true"></app-text-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-text-field id="email" [formGroup]="formGroup" label="Email:" name="email"></app-text-field>
+        <app-text-field id="email" [formGroup]="formGroup" label="Email:" name="email" [readonly]="true"></app-text-field>
       </div>
     </div>
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-date-field id="birth_date" [formGroup]="formGroup" label="Data de Nascimento:" name="dataNascimento"></app-date-field>
+        <app-date-field id="birth_date" [formGroup]="formGroup" label="Data de Nascimento:" name="dataNascimento" [readonly]="true"></app-date-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-dropdown-field id="gender" [formGroup]="formGroup" [options]="genders" optionLabel="name" label="Sexo:" name="sexo"></app-dropdown-field>
+        <app-dropdown-field id="gender" [formGroup]="formGroup" [options]="genders" optionLabel="name" label="Sexo:" name="sexo" [readonly]="true"></app-dropdown-field>
       </div>
     </div>
 
-    <div class="endereco">
+    <div class="row">
+      <div class="col-sm-12">
+        <app-multiselect-chips [formGroup]="formGroup" name="alergias" label="Alergias:" [options]="alergias" optionLabel="nome"></app-multiselect-chips>
+      </div>
+    </div>
+
+    <div class="endereco" style="padding: 0 20px">
       <h3>Endereço</h3>
     </div>
 
     <div class="row">
       <div class="col col-sm-12">
-        <app-text-field [formGroup]="formGroup" name="logradouro" label="Logradouro:"></app-text-field>
+        <app-text-field [formGroup]="formGroup" name="logradouro" label="Logradouro:" [readonly]="true"></app-text-field>
       </div>
     </div>
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-text-field [formGroup]="formGroup" name="numero" label="Número:"></app-text-field>
+        <app-text-field [formGroup]="formGroup" name="numero" label="Número:" [readonly]="true"></app-text-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-text-field [formGroup]="formGroup" name="setor" label="Setor:"></app-text-field>
+        <app-text-field [formGroup]="formGroup" name="setor" label="Setor:" [readonly]="true"></app-text-field>
       </div>
     </div>
 
     <div class="row">
       <div class="col col-sm-6">
-        <app-text-field [formGroup]="formGroup" name="cidade" label="Cidade:"></app-text-field>
+        <app-text-field [formGroup]="formGroup" name="cidade" label="Cidade:" [readonly]="true"></app-text-field>
       </div>
 
       <div class="col col-sm-6">
-        <app-text-field [formGroup]="formGroup" name="uf" label="Estado:"></app-text-field>
-      </div>
-    </div>
-
-    <div class="row btn-editar">
-      <div class="col col-sm-3">
-        <app-primary-btn label="EDITAR"></app-primary-btn>
+        <app-text-field [formGroup]="formGroup" name="uf" label="Estado:" [readonly]="true"></app-text-field>
       </div>
     </div>
   </form>

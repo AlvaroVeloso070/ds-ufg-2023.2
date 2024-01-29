@@ -104,7 +104,7 @@ export class AgendaService extends BaseService{
     return users
   }
 
-  updateSituacao(id : number, situacao : string, observacao : string){
+  updateSituacao(id : number, situacao : string, observacao : string = ' '){
     let params = {
       "situacao": situacao,
       "id":  id,

@@ -7,31 +7,37 @@
     <form [formGroup]="formGroup" class="login-form">
       <div class="row">
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="nome" label="Nome:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="nome" label="Nome:" id="nome" [required]="true"></app-text-field>
         </div>
 
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="email" label="Email:"></app-text-field>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <app-date-field [formGroup]="formGroup" name="dataNascimento" label="Data de nascimento:"></app-date-field>
-        </div>
-
-        <div class="col-6">
-          <app-dropdown-field [formGroup]="formGroup" name="sexo" label="Sexo:" [options]="generos" optionLabel="label" optionValue="id"></app-dropdown-field>
+          <app-text-field [formGroup]="formGroup" name="email" label="Email:" id="email" [required]="true"></app-text-field>
         </div>
       </div>
 
       <div class="row">
         <div class="col-6">
-          <app-password-field [formGroup]="formGroup" name="senha" label="Senha:"></app-password-field>
+          <app-date-field [formGroup]="formGroup" name="dataNascimentoForm" label="Data de nascimento:" id="dataNascimento" [required]="true"></app-date-field>
         </div>
 
         <div class="col-6">
-          <app-password-field [formGroup]="formGroup" name="senhaConfirmacao" label="Confirme sua senha:" ></app-password-field>
+          <app-dropdown-field [formGroup]="formGroup" name="sexo" label="Sexo:" [options]="generos" optionLabel="label" optionValue="id" id="sexo" [required]="true"></app-dropdown-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-password-field [formGroup]="formGroup" name="senha" label="Senha:" id="senha" [required]="true"></app-password-field>
+        </div>
+
+        <div class="col-6">
+          <app-password-field [formGroup]="formGroup" name="senhaConfirmacao" label="Confirme sua senha:" id="confirmacao-senha" [required]="true"></app-password-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <app-multiselect-chips [formGroup]="formGroup" name="alergiasForm" label="Alergias:" [options]="alergias" optionLabel="nome"></app-multiselect-chips>
         </div>
       </div>
 
@@ -41,32 +47,34 @@
 
       <div class="row">
         <div class="col-12">
-          <app-text-field [formGroup]="formGroup" name="logradouro" label="Logradouro:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="logradouro" label="Logradouro:" id="logradouro" [required]="true"></app-text-field>
         </div>
       </div>
 
       <div class="row">
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="numero" label="Número:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="numero" label="Número:" id="numero" [required]="true"></app-text-field>
         </div>
 
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="setor" label="Setor:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="setor" label="Setor:" id="setor" [required]="true"></app-text-field>
         </div>
       </div>
 
       <div class="row">
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="cidade" label="Cidade:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="cidade" label="Cidade:" id="cidade" [required]="true"></app-text-field>
         </div>
 
         <div class="col-6">
-          <app-text-field [formGroup]="formGroup" name="uf" label="Estado:"></app-text-field>
+          <app-text-field [formGroup]="formGroup" name="uf" label="Estado:" id="uf" [required]="true"></app-text-field>
         </div>
       </div>
 
-      <app-primary-btn label="CADASTRAR" (click)="submeter()"></app-primary-btn>
-      <app-primary-btn [style]="{marginTop: '10px'}" label="VOLTAR" (click)="voltar()"></app-primary-btn>
+      <div class="col-sm-12">
+        <app-primary-btn label="CADASTRAR" (click)="submeter()"></app-primary-btn>
+        <app-primary-btn [style]="{marginTop: '10px'}" label="VOLTAR" (click)="voltar()"></app-primary-btn>
+      </div>
     </form>
   </div>
 </div>
