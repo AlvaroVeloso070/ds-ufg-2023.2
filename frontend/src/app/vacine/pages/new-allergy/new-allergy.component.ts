@@ -30,6 +30,7 @@ export class NewAllergyComponent implements OnInit{
     this.formGroup.patchValue({
       vacinaId: this.formGroup.value.vacina?.id
     })
+
     this.allergyService.incluirAlergia(this.formGroup);
   }
 }

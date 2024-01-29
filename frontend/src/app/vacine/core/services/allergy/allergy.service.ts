@@ -19,7 +19,7 @@ export class AllergyService extends BaseService{
     return this.get().pipe(
       map((response: any) => {
         return response.map((alergia: any) => {
-          return new Allergy(alergia.id, alergia.nome, alergia.vacina);
+          return new Allergy(alergia.id, alergia.nome, alergia.vacina, alergia.vacinaId);
         });
       })
     )
@@ -34,12 +34,14 @@ export class AllergyService extends BaseService{
   }
 
   incluirAlergia(formGroup: FormGroup) {
+    let obj = formGroup.value
+    delete obj['vacina']
+
     if (formGroup.valid) {
       this.overlayService.updateOverlayState(true)
-      this.post(formGroup.value).subscribe({
+      this.post(obj).subscribe({
         next: () => {
           this.router.navigate(['vacine/home/allergy']);
-          this.overlayService.updateOverlayState(false)
         },
         error: (error) => {
           this.overlayService.updateOverlayState(false)
@@ -56,4 +58,5 @@ export class AllergyService extends BaseService{
       this.baseServiceProvider.getMessageService().add({severity:'warn', summary: 'Atenção!', detail: 'Preencha todos os campos corretamente!'});
     }
   }
+
 }

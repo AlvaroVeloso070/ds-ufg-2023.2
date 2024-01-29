@@ -25,7 +25,10 @@ export class BaixaVacinaComponent {
   }
 
   atualizarSituacao(){
-    if(this.novaSituacao == null) this.messageService.add({severity:'warn', summary: 'Aviso!', detail: 'Escolha uma nova situação para o agendamento!'})
+    if(this.novaSituacao == null){
+      this.messageService.add({severity:'warn', summary: 'Aviso!', detail: 'Escolha uma nova situação para o agendamento!'})
+      return
+    }
 
     this.agendaService.updateSituacao(this.appointment.id, this.novaSituacao.nome, this.observacao).subscribe(() => {
       this.ref.close(true)

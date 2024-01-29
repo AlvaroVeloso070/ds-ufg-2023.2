@@ -25,7 +25,9 @@
           <td>{{allergy.vacina ? allergy.vacina : '-'}}</td>
           <td>
             <div class="iconsCell">
-              <app-delete-btn [id]="allergy.id" [service]="service" [funcaoListar]="listarAlergias"></app-delete-btn>
+              <a class="icons" (click)="delete(allergy.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </a>
             </div>
           </td>
         </tr>

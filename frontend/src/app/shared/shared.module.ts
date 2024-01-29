@@ -18,7 +18,6 @@ import {CheckboxFieldComponent} from './checkbox-field/checkbox-field.component'
 import {CheckboxModule} from "primeng/checkbox";
 import {DropdownFieldComponent} from './dropdown-field/dropdown-field.component';
 import {DropdownModule} from "primeng/dropdown";
-import {DeleteBtnComponent} from './delete-btn/delete-btn.component';
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {NumberFieldComponent} from './number-field/number-field.component';
@@ -38,7 +37,6 @@ import {MultiSelectModule} from "primeng/multiselect";
     BaseFieldComponent,
     CheckboxFieldComponent,
     DropdownFieldComponent,
-    DeleteBtnComponent,
     NumberFieldComponent,
     MultiselectChipsComponent
   ],
@@ -51,7 +49,6 @@ import {MultiSelectModule} from "primeng/multiselect";
     SidenavComponent,
     CheckboxFieldComponent,
     DropdownFieldComponent,
-    DeleteBtnComponent,
     NumberFieldComponent,
     MultiselectChipsComponent
   ],

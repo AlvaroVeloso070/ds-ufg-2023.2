@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import Vacina from "../../core/entities/vacina";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
+import {DeleteModalComponent} from "../../dialogs/delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-vaccines',
@@ -35,4 +36,26 @@ export class VaccinesComponent implements OnInit {
       }
     );
   }
+
+  delete(id:number){
+    this.ref = this.dialogService.open(DeleteModalComponent, {
+      header: 'Excluir Registro',
+      width: '470px',
+      height: '270px',
+      baseZIndex: 10000,
+      styleClass: 'delete-modal.component',
+      maximizable: false,
+      dismissableMask: true
+    })
+
+    this.ref.onClose.subscribe((deleted:boolean) => {
+      if(deleted) {
+        this.service.delete(id).subscribe(() => {
+          this.listarVacinas()
+        })
+      }
+    })
+  }
+
+  protected readonly faTrash = faTrash;
 }

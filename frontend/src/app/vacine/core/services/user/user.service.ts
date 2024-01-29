@@ -46,7 +46,7 @@ export class UserService extends BaseService{
       return from(this.getUser(this.authService.getIdUsuarioLogado())).pipe(
         map((usuario: User) => {
           usuario.alergias = usuario.alergias.map((alergia: Allergy) => {
-            return new Allergy(alergia.id, alergia.nome, alergia.vacina);
+            return new Allergy(alergia.id, alergia.nome, alergia.vacina, alergia.vacinaId);
           })
           sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
           return usuario;

@@ -46,7 +46,6 @@ export class AgendaService extends BaseService{
 
     return this.getAppointmentsWithParams(params).pipe(
       map((response:any) => {
-        //TODO ARRUMAR ESSA LOGICA DE LISTAGEM DAS DOSES
         let i = 1
         let dosesVacina = 0
         return response.map((agenda:any) => {
@@ -69,7 +68,6 @@ export class AgendaService extends BaseService{
   getAllAppointments(){
     return this.get().pipe(
       map((response:any) => {
-        //TODO ESSA TB
         let i = 1
         let dosesVacina = 0
 

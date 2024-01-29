@@ -29,6 +29,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import { BaixaVacinaComponent } from './dialogs/baixa-vacina/baixa-vacina.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { DeleteModalComponent } from './dialogs/delete-modal/delete-modal.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     NewAllergyComponent,
     FutureAppointmentsComponent,
     BaixaVacinaComponent,
+    DeleteModalComponent,
   ],
     imports: [
         CommonModule,

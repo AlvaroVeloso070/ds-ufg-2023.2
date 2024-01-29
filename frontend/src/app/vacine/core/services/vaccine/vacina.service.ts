@@ -15,9 +15,11 @@ export class VacinaService extends BaseService {
   }
 
   getVacinas(): Observable<Vacina[]> {
+    this.overlayService.updateOverlayState(true)
     return this.get().pipe(
       map((response: any) => {
         return response.map((vacina: any) => {
+          this.overlayService.updateOverlayState(false)
           return new Vacina(vacina.id, vacina.titulo, vacina.doses, vacina.descricao, vacina.periodicidade, vacina.intervalo);
         });
       }));

@@ -3,6 +3,10 @@ import Allergy from "../../core/entities/Allergy";
 import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
+import {VacinaService} from "../../core/services/vaccine/vacina.service";
+import Vacina from "../../core/entities/vacina";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {DeleteModalComponent} from "../../dialogs/delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-allergies',
@@ -15,21 +19,55 @@ export class AllergiesComponent implements OnInit{
 
   ref: DynamicDialogRef | undefined
 
-  constructor(public service:AllergyService, public dialogService:DialogService, public overlayService:OverlayService) {
+  constructor(public service:AllergyService, public dialogService:DialogService, public overlayService:OverlayService, public vacinaService:VacinaService) {
   }
 
   ngOnInit() {
-    this.overlayService.updateOverlayState(true)
     this.listarAlergias();
   }
 
   listarAlergias() {
-    this.service.getAlergias().subscribe(
-      (allergies: Allergy[]) => {
-        this.allergies = allergies
-        this.overlayService.updateOverlayState(false)
-      }
-    )
+    this.overlayService.updateOverlayState(true)
+    this.vacinaService.getVacinas().subscribe((data:Vacina[]) => {
+      let vacinas : Vacina[] = data
+
+      this.service.getAlergias().subscribe(
+        (allergies: Allergy[]) => {
+          this.allergies = allergies
+
+          this.allergies.forEach(allergy => {
+            if(allergy.vacinaId){
+              vacinas.forEach(vacina => {
+                if(vacina.id == allergy.vacinaId) allergy.vacina = vacina.titulo
+              })
+            }
+          })
+
+          this.overlayService.updateOverlayState(false)
+        }
+      )
+    })
   }
 
+  delete(id:number){
+    this.ref = this.dialogService.open(DeleteModalComponent, {
+      header: 'Excluir Registro',
+      width: '470px',
+      height: '270px',
+      baseZIndex: 10000,
+      styleClass: 'delete-modal.component',
+      maximizable: false,
+      dismissableMask: true
+    })
+
+    this.ref.onClose.subscribe((deleted:boolean) => {
+      if(deleted) {
+        this.service.delete(id).subscribe(() => {
+          this.listarAlergias()
+        })
+      }
+    })
+  }
+
+  protected readonly faTrash = faTrash;
 }

@@ -122,21 +122,20 @@ export abstract class BaseService{
   }
 
 
-  protected delete(id: number, funcaoListar: any) {
-    this.http.delete<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers}).subscribe({
-      next: data => {
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers}).pipe(
+      map( data => {
         this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Registro excluído com sucesso!'});
-        if (funcaoListar) {
-          funcaoListar();
-        }
-      },
-      error: error => {
+        return data
+      }),
+      catchError( error => {
         if (error.status == 403) {
           this.messageService.add({severity:'warn', summary:'Erro!', detail:'Você não tem permissão para realizar esta ação.'});
         }else{
           this.messageService.add({severity:'error', summary:'Erro!', detail:'Ocorreu um erro ao excluir o registro.'});
         }
-      }
-    });
+        return throwError(error)
+      })
+    );
   }
 }
