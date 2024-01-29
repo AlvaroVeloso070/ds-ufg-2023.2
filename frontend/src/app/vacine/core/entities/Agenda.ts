@@ -1,4 +1,4 @@
-import Vacina from "./Vacina";
+import Vacina from "./vacina";
 
 
 export default class Agenda {

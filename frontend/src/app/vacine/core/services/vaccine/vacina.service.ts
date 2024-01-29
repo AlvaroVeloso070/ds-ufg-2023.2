@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
-import Vacina from "../../entities/Vacina";
+import Vacina from "../../entities/vacina";
 import {map, Observable} from "rxjs";
 import {FormGroup, Validators} from "@angular/forms";
 
