@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import Agenda from "../../entities/Agenda";
-import Vacina from "../../entities/vacina";
+import Vacina from "../../entities/Vacina";
 import {BaseService} from "../base.service";
 import {BaseServiceProvider} from "../base-service.provider";
 import {map, Observable} from "rxjs";

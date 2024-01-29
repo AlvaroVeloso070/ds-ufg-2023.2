@@ -4,7 +4,7 @@ import {BaseService} from '../base.service';
 import {BaseServiceProvider} from '../base-service.provider';
 import {map} from "rxjs";
 import {FormGroup, Validators} from "@angular/forms";
-import Vacina from "../../entities/vacina";
+import Vacina from "../../entities/Vacina";
 
 @Injectable({
   providedIn: 'root'
