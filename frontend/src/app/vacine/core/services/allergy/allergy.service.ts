@@ -43,13 +43,13 @@ export class AllergyService extends BaseService{
         next: () => {
           this.router.navigate(['vacine/home/allergy']);
         },
-        error: () => {
+        error: (error) => {
           this.overlayService.updateOverlayState(false)
           this.messageService.add(
             {
               severity: 'error',
               summary: 'Erro',
-              detail: 'Essa vacina já possui uma alergia relacionada a ela!'
+              detail: error.erro
             }
           );
         }
