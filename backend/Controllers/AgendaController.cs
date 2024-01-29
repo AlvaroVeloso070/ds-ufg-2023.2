@@ -83,7 +83,7 @@ namespace vacinacao_backend.Controllers {
         public async Task<ActionResult> PutSituacaoAgendamento(
             [FromQuery(Name = "id")][Required(ErrorMessage = "O queryparam id é obrigatório")] int id,
             [FromQuery(Name = "situacao")][Required(ErrorMessage = "O queryparam situacao é obrigatório")] EnumSituacao situacao,
-            [FromQuery(Name = "observacoes")][Required(ErrorMessage = "O queryparam observacoes é obrigatório")] string observacoes) {
+            [FromQuery(Name = "observacoes")] string? observacoes = null) {
             try {
                 await _agendaService.UpdateSituacaoAgendamento(id, situacao, observacoes);
                 return Ok();

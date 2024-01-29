@@ -94,7 +94,7 @@ namespace vacinacao_backend.Services {
             await _vacinacaoContext.SaveChangesAsync();
         }
 
-        public async Task UpdateSituacaoAgendamento(int id, EnumSituacao situacao, string observacoes) {
+        public async Task UpdateSituacaoAgendamento(int id, EnumSituacao situacao, string? observacoes) {
             var agendamento = await _vacinacaoContext.Agendamentos.Where(a => a.Id == id).FirstAsync();
             _vacinacaoContext.Agendamentos.Attach(agendamento);
             agendamento.Situacao = situacao;
