@@ -4,7 +4,6 @@ import {AllergyService} from "../../core/services/allergy/allergy.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {OverlayService} from "../../core/services/overlay/overlay.service";
 import {VacinaService} from "../../core/services/vaccine/vacina.service";
-import Vacina from "../../core/entities/Vacina";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DeleteModalComponent} from "../../dialogs/delete-modal/delete-modal.component";
 
@@ -28,25 +27,12 @@ export class AllergiesComponent implements OnInit{
 
   listarAlergias() {
     this.overlayService.updateOverlayState(true)
-    this.vacinaService.getVacinas().subscribe((data:Vacina[]) => {
-      let vacinas : Vacina[] = data
-
-      this.service.getAlergias().subscribe(
-        (allergies: Allergy[]) => {
-          this.allergies = allergies
-
-          this.allergies.forEach(allergy => {
-            if(allergy.vacinaId){
-              vacinas.forEach(vacina => {
-                if(vacina.id == allergy.vacinaId) allergy.vacina = vacina.titulo
-              })
-            }
-          })
-
-          this.overlayService.updateOverlayState(false)
-        }
-      )
-    })
+    this.service.getAlergias().subscribe(
+      (allergies: Allergy[]) => {
+        this.allergies = allergies
+        this.overlayService.updateOverlayState(false)
+      }
+    )
   }
 
   delete(id:number){

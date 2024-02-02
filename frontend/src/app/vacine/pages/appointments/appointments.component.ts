@@ -24,14 +24,12 @@ export class AppointmentsComponent implements OnInit{
   allAppointments : Agenda[] = []
 
   usuariosAdmin : User[] = []
-  userFilter : any = null
 
   ref: DynamicDialogRef | undefined;
 
   ngOnInit(): void {
     this.overlayService.updateOverlayState(true)
       this.agendaService.getAllAppointments().subscribe((appointments:Agenda[]) => {
-        console.log('appointments', appointments)
         this.allAppointments = appointments
 
         this.usuariosAdmin = this.agendaService.getUsersFromAppointments(this.allAppointments)
@@ -59,27 +57,13 @@ export class AppointmentsComponent implements OnInit{
     })
   }
 
-  buscarAgendamentos(){
-    this.getAllAppointments()
-  }
-
   getAllAppointments(){
     this.overlayService.updateOverlayState(true)
-    if(this.userFilter != null){
-      this.agendaService.getUserAppointments(this.userFilter.id).subscribe((appointments : Agenda[]) => {
-        this.allAppointments = appointments
-        this.allAppointments.forEach(app => app.paciente = this.userFilter)
-
-        this.overlayService.updateOverlayState(false)
-      })
-    }
-    else {
       this.agendaService.getAllAppointments().subscribe((appointments:Agenda[]) => {
         this.allAppointments = appointments
 
         this.overlayService.updateOverlayState(false)
       })
-    }
   }
 
   protected readonly faEdit = faEdit;

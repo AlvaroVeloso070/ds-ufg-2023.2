@@ -4,7 +4,6 @@ import {BaseService} from '../base.service';
 import {BaseServiceProvider} from '../base-service.provider';
 import {map} from "rxjs";
 import {FormGroup, Validators} from "@angular/forms";
-import Vacina from "../../entities/Vacina";
 
 @Injectable({
   providedIn: 'root'
@@ -27,19 +26,14 @@ export class AllergyService extends BaseService{
 
   getFormGroup() {
     return this.baseServiceProvider.getFormBuilder().group({
-      nome: ['', Validators.required],
-      vacina: [Vacina],
-      vacinaId: ['']
+      nome: ['', Validators.required]
     })
   }
 
   incluirAlergia(formGroup: FormGroup) {
-    let obj = formGroup.value
-    delete obj['vacina']
-
     if (formGroup.valid) {
       this.overlayService.updateOverlayState(true)
-      this.post(obj).subscribe({
+      this.post(formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['vacine/home/allergy']);
         },

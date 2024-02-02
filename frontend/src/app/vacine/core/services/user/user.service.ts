@@ -72,7 +72,15 @@ export class UserService extends BaseService{
       let body = formGroup.value
       delete body['senhaConfirmacao']
 
-      this.post(body).subscribe({
+      let obs = this.http.post<any>(`${this.apiUrl}` + '/auth/register', body, {headers: this.headers})
+        .pipe(
+          map(data => {
+            this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Registro cadastrado com sucesso!'});
+            return data;
+          })
+        )
+
+      obs.subscribe({
         next: () => {
           this.router.navigate([proximaRota]);
           this.overlayService.updateOverlayState(false)

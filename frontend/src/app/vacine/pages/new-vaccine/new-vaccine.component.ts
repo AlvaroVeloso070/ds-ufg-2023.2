@@ -11,9 +11,10 @@ export class NewVaccineComponent implements OnInit{
   public formGroup !: FormGroup;
 
   readonly periodicidades = [
-    {label: 'Dias', value: 'dias'},
-    {label: 'Meses', value: 'meses'},
-    {label: 'Anos', value: 'anos'}
+    {label: 'Dias', value: 1},
+    {label: 'Semanas', value: 2},
+    {label: 'Meses', value: 3},
+    {label: 'Anos', value: 4}
   ]
 
   constructor(private vacinaService : VacinaService) {

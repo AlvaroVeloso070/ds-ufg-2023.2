@@ -31,6 +31,7 @@ export class VaccinesComponent implements OnInit {
     this.overlayService.updateOverlayState(true)
     this.service.getVacinas().subscribe(
       (vaccines: Vacina[]) => {
+        console.log('vacina', vaccines)
         this.vaccines = vaccines;
         this.overlayService.updateOverlayState(false)
       }

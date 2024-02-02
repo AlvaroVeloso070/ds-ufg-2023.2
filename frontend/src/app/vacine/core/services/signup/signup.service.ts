@@ -4,7 +4,6 @@ import {BaseServiceProvider} from "../base-service.provider";
 import {AbstractControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user/user.service";
 import {formatDate} from "@angular/common";
-import Allergy from "../../entities/Allergy";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class SignupService extends BaseService{
     return this.baseServiceProvider.getFormBuilder().group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', Validators.required],
+      password: ['', Validators.required],
       senhaConfirmacao: ['', [Validators.required]],
       dataNascimento: [''],
       dataNascimentoForm: ['', Validators.required],
@@ -29,22 +28,14 @@ export class SignupService extends BaseService{
       uf: ['', Validators.required],
       setor: ['', Validators.required],
       cidade: ['', Validators.required],
-      alergias: [[]],
-      alergiasForm: [[]]
     });
   }
 
   incluirUsuario(formGroup: FormGroup) {
-    if (formGroup.get('senha')?.value != formGroup.get('senhaConfirmacao')?.value) {
+    if (formGroup.get('password')?.value != formGroup.get('senhaConfirmacao')?.value) {
       this.baseServiceProvider.getMessageService().add({severity: 'warn', summary: 'Aviso!', detail: 'A senha e a confirmação da senha não são iguais.'});
       return;
     }
-
-    formGroup.patchValue({
-      alergias: formGroup.get('alergiasForm')?.value.map((alergia: Allergy) => {
-        return alergia.id;
-      })
-    })
 
     formGroup.patchValue({
       dataNascimento: formatDate(formGroup.controls['dataNascimentoForm'].value, 'yyyy-MM-dd', 'en')

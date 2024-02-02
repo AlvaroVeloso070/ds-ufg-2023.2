@@ -38,6 +38,7 @@ export class VacinaService extends BaseService {
 
   incluirVacina(formGroup: FormGroup) {
     if (formGroup.valid) {
+      console.log('formgorup', formGroup)
       this.overlayService.updateOverlayState(true)
       this.post(formGroup.value).subscribe({
         next: () => {

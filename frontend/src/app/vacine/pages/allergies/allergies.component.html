@@ -14,7 +14,6 @@
       <ng-template pTemplate="header">
         <tr class="tableRow">
           <th>Nome</th>
-          <th>Vacina Relacionada</th>
           <th style="width: 5%">Ações</th>
         </tr>
       </ng-template>
@@ -22,7 +21,6 @@
       <ng-template pTemplate="body" let-allergy>
         <tr class="tableRow">
           <td class="firstCell">{{allergy.nome}}</td>
-          <td>{{allergy.vacina ? allergy.vacina : '-'}}</td>
           <td>
             <div class="iconsCell">
               <a class="icons" (click)="delete(allergy.id)">

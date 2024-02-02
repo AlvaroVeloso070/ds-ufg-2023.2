@@ -26,7 +26,12 @@
           <td class="firstCell">{{vaccine.titulo}}</td>
           <td>{{vaccine.descricao ? vaccine.descricao : '-'}}</td>
           <td>{{vaccine.doses}}</td>
-          <td>{{vaccine.intervalo + ' ' + vaccine.periodicidade}}</td>
+          <td [ngSwitch]="vaccine.periodicidade">
+            <p *ngSwitchCase="1">{{vaccine.intervalo + ' Dias'}}</p>
+            <p *ngSwitchCase="2">{{vaccine.intervalo + ' Semanas'}}</p>
+            <p *ngSwitchCase="3">{{vaccine.intervalo + ' Meses'}}</p>
+            <p *ngSwitchCase="4">{{vaccine.intervalo + ' Anos'}}</p>
+          </td>
           <td>
             <div class="iconsCell">
               <a class="icons" (click)="delete(vaccine.id)">

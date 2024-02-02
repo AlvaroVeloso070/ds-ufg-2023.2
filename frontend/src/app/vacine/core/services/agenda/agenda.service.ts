@@ -68,7 +68,6 @@ export class AgendaService extends BaseService{
   getAllAppointments(){
     return this.get().pipe(
       map((response:any) => {
-        console.log('response:', response)
         let i = 1
         let dosesVacina = 0
 
@@ -122,9 +121,20 @@ export class AgendaService extends BaseService{
   }
 
   incluirAgendamento(formGroup: FormGroup) {
+    let body = {
+      dataSituacao: formGroup.controls['data'].value,
+      usuario: {
+        id: formGroup.controls['usuarioId'].value
+      },
+      vacina: {
+        id: formGroup.controls['vacinaId'].value
+      },
+      situacao: 'AGENDADO'
+    }
+
     if (formGroup.valid) {
       this.overlayService.updateOverlayState(true)
-      this.post(formGroup.value).subscribe({
+      this.post(body).subscribe({
         next: () => {
           this.baseServiceProvider.getRouter().navigate(['vacine/home/appointments']);
           this.overlayService.updateOverlayState(false)
