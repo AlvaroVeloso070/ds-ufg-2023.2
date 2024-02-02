@@ -68,6 +68,7 @@ export class AgendaService extends BaseService{
   getAllAppointments(){
     return this.get().pipe(
       map((response:any) => {
+        console.log('response:', response)
         let i = 1
         let dosesVacina = 0
 
@@ -83,7 +84,7 @@ export class AgendaService extends BaseService{
           let usuario = agenda.usuario
 
           ++i
-          return new Agenda(agenda.id, agenda.data,  agenda.situacao, vacina, usuario)
+          return new Agenda(agenda.id, agenda.dataSituacao,  agenda.situacao, vacina, usuario)
         })
       })
     )

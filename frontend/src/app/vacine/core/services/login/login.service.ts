@@ -11,12 +11,12 @@ import {UserService} from "../user/user.service";
 export class LoginService extends BaseService{
 
   constructor(baseServiceProvider: BaseServiceProvider, private userService : UserService) {
-    super(baseServiceProvider, '/login');
+    super(baseServiceProvider, '/auth');
   }
 
   doLogin(login: Login) {
     this.overlayService.updateOverlayState(true)
-    this.http.post(this.apiUrl + this.endpoint, login).subscribe({
+    this.http.post(this.apiUrl + this.endpoint + '/login', login).subscribe({
       next: data => {
         this.authService.autenticarSessao(data);
         this.userService.getUsuarioLogado().subscribe((usuario) => {
@@ -36,8 +36,8 @@ export class LoginService extends BaseService{
 
   getFormGroup() : FormGroup {
     return new FormBuilder().group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]]
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 

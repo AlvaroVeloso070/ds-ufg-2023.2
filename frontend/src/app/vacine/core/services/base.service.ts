@@ -65,7 +65,7 @@ export abstract class BaseService{
 
   putWithParamsAgenda(params: any): Observable<any> {
     this.overlayService.updateOverlayState(true)
-    return this.http.put<any>(`${this.apiUrl}${this.endpoint}/situacao`, null, {headers: this.headers, params: params})
+    return this.http.put<any>(`${this.apiUrl}${this.endpoint}`, null, {headers: this.headers, params: params})
       .pipe(
         map(data => {
           this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Registro atualizado com sucesso!'});
@@ -123,6 +123,7 @@ export abstract class BaseService{
 
 
   delete(id: number): Observable<any> {
+
     return this.http.delete<any>(this.apiUrl + this.endpoint + '/' + id, {headers: this.headers}).pipe(
       map( data => {
         this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Registro excluído com sucesso!'});

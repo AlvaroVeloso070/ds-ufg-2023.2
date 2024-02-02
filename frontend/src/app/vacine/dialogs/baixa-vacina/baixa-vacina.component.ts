@@ -30,38 +30,25 @@ export class BaixaVacinaComponent {
       return
     }
 
-    this.agendaService.updateSituacao(this.appointment.id, this.novaSituacao.nome, this.observacao).subscribe(() => {
+    this.agendaService.updateSituacao(this.appointment.id, this.novaSituacao.situacao, this.observacao).subscribe(() => {
       this.ref.close(true)
     })
   }
 
   loadSituacaoAtual(){
-    switch (this.appointment.situacao){
-      case 0:
-        this.situacaoAtual = 'Agendado'
-        break
-      case 1:
-        this.situacaoAtual = 'Realizado'
-        break
-      case 2:
-        this.situacaoAtual = 'Cancelado'
-        break
-    }
+    this.situacaoAtual = this.appointment.situacao
   }
 
   loadSituacoes(){
     let situacoes = [
       {
-        situacao: 0,
-        nome: 'Agendado'
+        situacao: 'AGENDADO'
       },
       {
-        situacao: 1,
-        nome: 'Realizado'
+        situacao: 'REALIZADO'
       },
       {
-        situacao: 2,
-        nome: 'Cancelado'
+        situacao: 'CANCELADO'
       }
     ]
 

@@ -26,8 +26,8 @@ export class AuthService {
   }
 
   autenticarSessao(response : any) {
-    this.setToken(response.accessToken);
-    this.setIdUsuarioLogado(response.usuarioId);
+    this.setToken(response.token);
+    this.setIdUsuarioLogado(response.usuarioID);
   }
 
   constructor() { }
